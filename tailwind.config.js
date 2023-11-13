@@ -9,6 +9,12 @@ export default {
       xl: "1280px",
       "2xl": "1536px",
     },
+    colors: {
+      darkMain: "#2C3333",
+      main: "#2E4F4F",
+      sub: "#0E8388",
+      accent: "#CBE4DE",
+    },
   },
   plugins: [],
 };

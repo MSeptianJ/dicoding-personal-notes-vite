@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import AppNote from "./AppNote";
 import "./assets/styles/index.css";
-import NotePage from "./pages/NotePage";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <NotePage />
+    <AppNote />
   </React.StrictMode>,
 );
