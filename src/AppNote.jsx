@@ -11,14 +11,14 @@ function AppNote() {
   return (
     <div className=" min-h-screen w-full bg-main">
       <NoteHeader />
-      <div className=" bg-subA w-ful m-auto grid grid-cols-4 justify-items-center gap-4 p-4">
+      <div className=" bg-subA w-ful m-auto grid grid-cols-4 gap-4 p-4">
         <div className=" col-span-3 grid w-full gap-5">
           <NoteList ListTitle="Notes" ListNotes={first} />
 
-          <NoteList ListTitle="Archive" />
+          <NoteList ListTitle="Archive" ListNotes={first} />
         </div>
 
-        <div className="grid w-full grid-rows-6 gap-5">
+        <div className="flex w-full flex-col items-center gap-5">
           <NoteSearch />
 
           <NoteSubmit />
