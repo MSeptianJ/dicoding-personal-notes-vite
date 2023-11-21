@@ -1,24 +1,58 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 
-const NoteSubmit = () => {
+const NoteSubmit = ({ addNote }) => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+
+  const titleHandler = (e) => {
+    setTitle(e.target.value.slice(0, 20));
+  };
+
+  const descHandler = (e) => {
+    setBody(e.target.value);
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    setTitle("");
+    setBody("");
+
+    const newNoteData = {
+      title,
+      body,
+    };
+
+    addNote(newNoteData);
+    console.log(newNoteData);
+  };
+
   return (
     <div className=" w-full rounded-sm bg-sub p-3">
       <h2 className=" font-semibold uppercase">Submit Note</h2>
       <form
         action=""
         className=" m-auto grid w-full grid-rows-6 items-center gap-1"
+        onSubmit={submitHandler}
       >
-        <p className=" text-sm">Title Character : 20</p>
+        <p className=" text-sm">Title Characters Left : {20 - title.length}</p>
         <input
           type="text"
           className=" block w-full rounded-sm border-2 border-accent bg-transparent p-2 text-sm"
           placeholder="Title Note"
+          value={title}
+          onChange={titleHandler}
+          required
         />
 
         <textarea
           name=""
           className=" row-span-3 block h-full w-full rounded-sm border-2 border-accent bg-transparent p-2 text-sm"
           placeholder="Body note"
+          value={body}
+          onChange={descHandler}
+          required
         ></textarea>
 
         <input
@@ -32,7 +66,7 @@ const NoteSubmit = () => {
 };
 
 NoteSubmit.propTypes = {
-  func: PropTypes.func,
+  addNote: PropTypes.func,
 };
 
 export default NoteSubmit;
