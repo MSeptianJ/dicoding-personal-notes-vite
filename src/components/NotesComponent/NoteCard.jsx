@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import NoteCardButton from "./NoteCardButton";
 import NoteCardBody from "./NoteCardBody";
 
-const NoteCard = ({ noteData, deleteNote }) => {
+const NoteCard = ({ noteData, deleteNote, archiveNote, activateNote }) => {
   return (
     <>
       <div className=" flex w-full flex-col justify-between gap-3 rounded-sm bg-main p-2  text-accent">
@@ -11,7 +11,20 @@ const NoteCard = ({ noteData, deleteNote }) => {
         </div>
 
         <div className=" grid w-full grid-cols-2 gap-2">
-          <NoteCardButton btnTitle="Archive" />
+          {!noteData.archived ? (
+            <NoteCardButton
+              btnTitle="Archive"
+              btnFunc={archiveNote}
+              btnId={noteData.id}
+            />
+          ) : (
+            <NoteCardButton
+              btnTitle="Activate"
+              btnFunc={activateNote}
+              btnId={noteData.id}
+            />
+          )}
+
           <NoteCardButton
             btnTitle="Delete"
             btnFunc={deleteNote}
@@ -26,6 +39,8 @@ const NoteCard = ({ noteData, deleteNote }) => {
 NoteCard.propTypes = {
   noteData: PropTypes.object,
   deleteNote: PropTypes.func,
+  archiveNote: PropTypes.func,
+  activateNote: PropTypes.func,
 };
 
 export default NoteCard;
