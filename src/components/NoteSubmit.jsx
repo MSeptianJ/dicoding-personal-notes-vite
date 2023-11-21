@@ -25,7 +25,6 @@ const NoteSubmit = ({ addNote }) => {
     };
 
     addNote(newNoteData);
-    console.log(newNoteData);
   };
 
   return (

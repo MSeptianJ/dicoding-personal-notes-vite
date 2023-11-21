@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import NoteCard from "./NoteCard";
 
-const NoteList = ({ ListTitle, ListNotes }) => {
+const NoteList = ({ ListTitle, ListNotes, deleteNote }) => {
   return (
     <div className=" w-full rounded-sm bg-sub p-3">
       <h2 className=" mb-2 font-semibold uppercase text-accent">{ListTitle}</h2>
@@ -9,7 +9,9 @@ const NoteList = ({ ListTitle, ListNotes }) => {
         {ListNotes.length <= 0 ? (
           <p className=" text-center">No Notes</p>
         ) : (
-          ListNotes?.map((note, id) => <NoteCard key={id} noteData={note} />)
+          ListNotes?.map((note, id) => (
+            <NoteCard key={id} noteData={note} deleteNote={deleteNote} />
+          ))
         )}
       </div>
     </div>
@@ -19,6 +21,7 @@ const NoteList = ({ ListTitle, ListNotes }) => {
 NoteList.propTypes = {
   ListTitle: PropTypes.string,
   ListNotes: PropTypes.array,
+  deleteNote: PropTypes.func,
 };
 
 export default NoteList;

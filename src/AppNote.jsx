@@ -22,6 +22,11 @@ function AppNote() {
     setNotes((prev) => [...prev, noteData]);
   };
 
+  const handlerDeleteNote = (id) => {
+    const selectedNote = notes.filter((note) => note.id != id);
+    setNotes(selectedNote);
+  };
+
   return (
     <div className=" min-h-screen w-full bg-main">
       <NoteHeader />
@@ -33,9 +38,17 @@ function AppNote() {
         </div>
 
         <div className=" grid w-full gap-5 lg:col-span-3">
-          <NoteList ListTitle="Notes" ListNotes={notes} />
+          <NoteList
+            ListTitle="Notes"
+            ListNotes={notes}
+            deleteNote={handlerDeleteNote}
+          />
 
-          <NoteList ListTitle="Archive" ListNotes={data} />
+          <NoteList
+            ListTitle="Archive"
+            ListNotes={data}
+            deleteNote={handlerDeleteNote}
+          />
         </div>
       </div>
     </div>
