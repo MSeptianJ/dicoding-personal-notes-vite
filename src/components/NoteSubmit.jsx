@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-const NoteSubmit = ({ addNote }) => {
+const NoteSubmit = ({ submitFunc }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -19,12 +19,12 @@ const NoteSubmit = ({ addNote }) => {
     setTitle("");
     setBody("");
 
-    const newNoteData = {
+    const newNote = {
       title,
       body,
     };
 
-    addNote(newNoteData);
+    submitFunc(newNote);
   };
 
   return (
@@ -65,7 +65,7 @@ const NoteSubmit = ({ addNote }) => {
 };
 
 NoteSubmit.propTypes = {
-  addNote: PropTypes.func,
+  submitFunc: PropTypes.func,
 };
 
 export default NoteSubmit;

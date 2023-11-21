@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-const NoteSearch = ({ searchNote }) => {
+const NoteSearch = ({ searchFunc }) => {
   const searchHandler = (e) => {
-    searchNote(e.target.value);
+    searchFunc(e.target.value);
   };
 
   return (
@@ -10,6 +10,7 @@ const NoteSearch = ({ searchNote }) => {
       <label className=" font-semibold uppercase" htmlFor="NoteSearch">
         Search Notes
       </label>
+
       <div className=" m-auto w-full">
         <input
           className=" m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm"
@@ -24,7 +25,7 @@ const NoteSearch = ({ searchNote }) => {
 };
 
 NoteSearch.propTypes = {
-  searchNote: PropTypes.func,
+  searchFunc: PropTypes.func,
 };
 
 export default NoteSearch;

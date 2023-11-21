@@ -4,9 +4,9 @@ import NoteCard from "./NoteCard";
 const NoteList = ({
   ListTitle,
   ListNotes,
-  deleteNote,
-  archiveNote,
-  activateNote,
+  deleteFunc,
+  archiveFunc,
+  activateFunc,
 }) => {
   return (
     <div className=" w-full rounded-sm bg-sub p-3">
@@ -19,9 +19,9 @@ const NoteList = ({
             <NoteCard
               key={id}
               noteData={note}
-              deleteNote={deleteNote}
-              archiveNote={archiveNote}
-              activateNote={activateNote}
+              deleteFunc={deleteFunc}
+              archiveFunc={archiveFunc}
+              activateFunc={activateFunc}
             />
           ))
         )}
@@ -33,9 +33,9 @@ const NoteList = ({
 NoteList.propTypes = {
   ListTitle: PropTypes.string,
   ListNotes: PropTypes.array,
-  deleteNote: PropTypes.func,
-  archiveNote: PropTypes.func,
-  activateNote: PropTypes.func,
+  deleteFunc: PropTypes.func,
+  archiveFunc: PropTypes.func,
+  activateFunc: PropTypes.func,
 };
 
 export default NoteList;
