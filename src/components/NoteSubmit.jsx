@@ -4,9 +4,10 @@ import { useState } from "react";
 const NoteSubmit = ({ submitFunc }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const MAXCHARACTER = 50;
 
   const titleHandler = (e) => {
-    setTitle(e.target.value.slice(0, 20));
+    setTitle(e.target.value.slice(0, MAXCHARACTER));
   };
 
   const descHandler = (e) => {
@@ -35,7 +36,9 @@ const NoteSubmit = ({ submitFunc }) => {
         className=" m-auto grid w-full grid-rows-6 items-center gap-1"
         onSubmit={submitHandler}
       >
-        <p className=" text-sm">Title Characters Left : {20 - title.length}</p>
+        <p className=" text-sm">
+          Title Characters Left : {MAXCHARACTER - title.length}
+        </p>
         <input
           type="text"
           className=" block w-full rounded-sm border-2 border-accent bg-transparent p-2 text-sm"

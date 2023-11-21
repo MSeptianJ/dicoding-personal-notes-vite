@@ -24,17 +24,17 @@ function AppNote() {
       id: +new Date(),
       title: newData.title,
       body: newData.body,
-      createdAt: new Date().toISOString(),
       archived: false,
+      createdAt: new Date().toISOString(),
     };
 
     setNotes((prev) => [...prev, noteData]);
   };
 
   const handlerDeleteNote = (id) => {
-    const selectedNote = notes.filter((note) => note.id != id);
+    const filteredNotes = notes.filter((note) => note.id != id);
 
-    setNotes(selectedNote);
+    setNotes(filteredNotes);
   };
 
   const handlerSearchNote = (query) => {
@@ -42,19 +42,19 @@ function AppNote() {
   };
 
   const handlerArchiveNote = (id) => {
-    const selectedNote = notes.map((note) =>
+    const changedNotes = notes.map((note) =>
       note.id === id ? { ...note, archived: true } : note,
     );
 
-    setNotes(selectedNote);
+    setNotes(changedNotes);
   };
 
   const handlerActivateNote = (id) => {
-    const selectedNote = notes.map((note) =>
+    const changedNotes = notes.map((note) =>
       note.id === id ? { ...note, archived: false } : note,
     );
 
-    setNotes(selectedNote);
+    setNotes(changedNotes);
   };
 
   return (
