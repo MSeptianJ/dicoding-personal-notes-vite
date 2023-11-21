@@ -12,24 +12,34 @@ const NoteCard = ({ noteData, deleteFunc, archiveFunc, activateFunc }) => {
 
         <div className=" grid w-full grid-cols-2 gap-2">
           {!noteData.archived ? (
-            <NoteCardButton
-              btnTitle="Archive"
-              btnFunc={archiveFunc}
-              btnId={noteData.id}
-            />
+            <>
+              <NoteCardButton
+                btnTitle="Archive"
+                btnFunc={archiveFunc}
+                btnId={noteData.id}
+              />
+              <NoteCardButton
+                btnTitle="Delete"
+                btnFunc={deleteFunc}
+                btnId={noteData.id}
+              />
+            </>
           ) : (
-            <NoteCardButton
-              btnTitle="Activate"
-              btnFunc={activateFunc}
-              btnId={noteData.id}
-            />
+            <>
+              <NoteCardButton
+                btnTitle="Activate"
+                btnFunc={activateFunc}
+                btnId={noteData.id}
+                darkTheme
+              />
+              <NoteCardButton
+                btnTitle="Delete"
+                btnFunc={deleteFunc}
+                btnId={noteData.id}
+                darkTheme
+              />
+            </>
           )}
-
-          <NoteCardButton
-            btnTitle="Delete"
-            btnFunc={deleteFunc}
-            btnId={noteData.id}
-          />
         </div>
       </div>
     </>
