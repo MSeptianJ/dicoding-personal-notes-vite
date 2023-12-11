@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
-const Home = ({ text }) => {
+const HomePage = ({ text }) => {
   return <div>{text}</div>;
 };
 
-Home.propTypes = {
+HomePage.propTypes = {
   text: PropTypes.func,
 };
 
-export default Home;
+export default HomePage;
