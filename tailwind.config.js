@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from "tailwindcss/defaultTheme";
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -9,12 +11,15 @@ export default {
       xl: "1280px",
       "2xl": "1536px",
     },
+    fontFamily: {
+      sans: ["Inter Var", ...defaultTheme.fontFamily.sans],
+    },
     extend: {
       colors: {
-        darkMain: "#2C3333",
-        main: "#2E4F4F",
-        sub: "#0E8388",
-        accent: "#CBE4DE",
+        secondary: "#003e64",
+        primary: "#004f80",
+        accent: "#ff7017",
+        back: "#FFFFFF",
       },
     },
   },
