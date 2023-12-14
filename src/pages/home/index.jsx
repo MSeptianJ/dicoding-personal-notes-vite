@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import NoteList from "../../components/NotesComponent/NoteList";
-import { getInitialData } from "../../utils/utils";
+import { getAllNotes } from "../../utils/local-data";
 
 const HomePage = () => {
-  const notes = getInitialData();
+  const notes = getAllNotes();
 
   const query = "";
 

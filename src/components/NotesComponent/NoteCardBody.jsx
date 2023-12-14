@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { showFormattedDate } from "../../utils/utils";
+import { showFormattedDate } from "../../utils";
 
 const NoteCardBody = ({ noteData }) => {
   return (

@@ -3,10 +3,10 @@ import NoteHeader from "./components/NoteHeader";
 import NoteSearch from "./components/NoteSearch";
 import NoteSubmit from "./components/NoteSubmit";
 import NoteList from "./components/NotesComponent/NoteList";
-import { getInitialData } from "./utils/utils";
+import { getAllNotes } from "./utils/local-data";
 
 function AppNote() {
-  const [notes, setNotes] = useState(getInitialData);
+  const [notes, setNotes] = useState(getAllNotes);
   const [query, setQuery] = useState("");
 
   const activeNotes = notes.filter(
