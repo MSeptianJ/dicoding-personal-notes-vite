@@ -6,7 +6,7 @@ const Root = () => {
     <div className=" min-h-screen w-full bg-main">
       <NoteHeader />
 
-      <div className=" bg-subA w-ful m-auto grid gap-4 p-4 lg:grid-cols-4">
+      <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet />
       </div>
     </div>
