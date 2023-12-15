@@ -5,7 +5,7 @@ import NoteCardButton from "./NoteCardButton";
 const NoteCard = ({ noteData, deleteFunc, archiveFunc, activateFunc }) => {
   return (
     <>
-      <div className=" flex w-full flex-col justify-between gap-3 rounded-sm bg-main p-2  text-accent">
+      <div className=" bg-primary text-back flex w-full flex-col justify-between gap-3 rounded-sm p-2 shadow-lg shadow-[rgba(0,0,0,0.3)]">
         <div className=" w-full px-2">
           <NoteCardBody noteData={noteData} />
         </div>
@@ -17,6 +17,7 @@ const NoteCard = ({ noteData, deleteFunc, archiveFunc, activateFunc }) => {
                 btnTitle="Archive"
                 btnFunc={archiveFunc}
                 btnId={noteData.id}
+                isFocus
               />
               <NoteCardButton
                 btnTitle="Delete"
@@ -30,13 +31,12 @@ const NoteCard = ({ noteData, deleteFunc, archiveFunc, activateFunc }) => {
                 btnTitle="Activate"
                 btnFunc={activateFunc}
                 btnId={noteData.id}
-                darkTheme
+                isFocus
               />
               <NoteCardButton
                 btnTitle="Delete"
                 btnFunc={deleteFunc}
                 btnId={noteData.id}
-                darkTheme
               />
             </>
           )}

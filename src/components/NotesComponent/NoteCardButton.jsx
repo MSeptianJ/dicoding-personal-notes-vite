@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const NoteCardButton = ({ btnTitle, btnFunc, btnId, darkTheme }) => {
+const NoteCardButton = ({ btnTitle, btnFunc, btnId, isFocus }) => {
   const handleFunction = () => {
     btnFunc(btnId);
   };
@@ -8,11 +8,9 @@ const NoteCardButton = ({ btnTitle, btnFunc, btnId, darkTheme }) => {
   return (
     <button
       onClick={handleFunction}
-      className={
-        darkTheme
-          ? " rounded-sm bg-darkMain font-semibold text-sub hover:bg-sub hover:text-main"
-          : " rounded-sm bg-sub font-semibold text-main hover:bg-darkMain hover:text-sub"
-      }
+      className={`${
+        isFocus ? "hover:bg-primary bg-accent text-main" : " hover:bg-accent"
+      } rounded-sm p-1 text-sm shadow-xl`}
     >
       {btnTitle}
     </button>
@@ -23,7 +21,7 @@ NoteCardButton.propTypes = {
   btnFunc: PropTypes.func,
   btnTitle: PropTypes.string,
   btnId: PropTypes.number,
-  darkTheme: PropTypes.bool,
+  isFocus: PropTypes.bool,
 };
 
 export default NoteCardButton;
