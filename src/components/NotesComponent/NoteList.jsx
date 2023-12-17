@@ -9,9 +9,13 @@ const NoteList = ({
   activateFunc,
 }) => {
   return (
-    <div className=" w-full rounded-sm bg-sub p-3">
-      <h2 className=" mb-2 font-bold uppercase">{ListTitle}</h2>
-      <div className=" m-auto grid w-full gap-5 md:grid-cols-2 lg:grid-cols-4">
+    <div className=" bg-sub w-full rounded-sm p-3">
+      <h2 className=" mb-5 text-xl font-bold uppercase">{ListTitle}</h2>
+      <div
+        className={`${
+          ListNotes.length ? "grid gap-5 md:grid-cols-2 lg:grid-cols-4" : ""
+        } m-auto w-full `}
+      >
         {ListNotes.length <= 0 ? (
           <p className=" text-center">No Notes</p>
         ) : (

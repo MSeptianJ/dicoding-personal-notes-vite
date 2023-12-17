@@ -8,7 +8,7 @@ const NotePage = () => {
 
   return (
     <div className=" h-full w-full p-8">
-      <div className=" mb-5 w-full bg-primary p-6 text-back">
+      <div className=" mb-5 w-full border-b-2 border-b-accent bg-primary px-6 py-4 text-back">
         <h3
           className=" mb-3 text-3xl font-bold text-accent"
           title={noteData?.title}

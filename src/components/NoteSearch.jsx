@@ -19,7 +19,7 @@ const NoteSearch = () => {
 
       <div className=" m-auto w-full">
         <input
-          className=" m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm text-back"
+          className=" m-auto w-full rounded-md border border-back bg-transparent p-2 text-sm text-back"
           type="text"
           name="note-search"
           id="NoteSearch"

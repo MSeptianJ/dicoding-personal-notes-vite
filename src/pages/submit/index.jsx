@@ -30,11 +30,11 @@ const SubmitPage = () => {
   };
 
   return (
-    <div className=" bg-sub w-full rounded-sm bg-primary p-6 text-back">
+    <div className=" bg-sub m-auto w-full rounded-sm bg-primary px-6 py-4 text-back shadow-lg shadow-[rgba(0,0,0,0.3)] lg:w-1/2">
       <h2 className=" text-xl font-semibold uppercase">Submit Note</h2>
       <form
         action=""
-        className=" m-auto grid w-full grid-rows-6 items-center gap-1"
+        className=" m-auto grid w-full grid-rows-6 items-center gap-2"
         onSubmit={submitHandler}
       >
         <p className=" text-sm">
@@ -60,8 +60,8 @@ const SubmitPage = () => {
 
         <input
           type="submit"
-          value="Add note"
-          className=" hover:border-main hover:bg-sub m-auto block w-1/2 cursor-pointer rounded-sm bg-accent p-1 hover:border"
+          value="Submit"
+          className=" m-auto block cursor-pointer rounded-sm bg-accent px-4 py-2 font-bold uppercase transition-all duration-200 hover:bg-opacity-80"
         />
       </form>
     </div>

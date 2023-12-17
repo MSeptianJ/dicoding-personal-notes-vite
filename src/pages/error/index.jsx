@@ -17,7 +17,7 @@ const ErrorPage = () => {
           )}
         </div>
 
-        <div className=" m-auto w-1/3 cursor-pointer bg-gray-500 text-white hover:bg-opacity-70">
+        <div className=" m-auto w-1/3 cursor-pointer bg-gray-500 text-white transition-all duration-200 hover:bg-opacity-70">
           <Link to={"/"} className=" block h-full w-full p-2">
             Menu
           </Link>

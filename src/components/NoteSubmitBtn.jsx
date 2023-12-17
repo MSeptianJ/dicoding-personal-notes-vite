@@ -3,7 +3,7 @@ import { MdAddBox } from "react-icons/md";
 
 const NoteSubmitBtn = () => {
   return (
-    <div className=" m-auto h-full w-full cursor-pointer hover:bg-accent">
+    <div className=" m-auto h-full w-full cursor-pointer transition-all duration-200 hover:bg-accent">
       <Link
         to={"/submit"}
         className=" m-auto flex h-full w-full flex-col items-center justify-center gap-3 p-3 text-lg text-back lg:flex-row"
