@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import NoteList from "../../components/NotesComponent/NoteList";
-import { getActiveNotes } from "../../utils/local-data";
+import NoteSearch from "../../components/NoteSearch";
+import { useOutletContext } from "react-router-dom";
 
 const HomePage = () => {
-  const activeNotes = getActiveNotes();
+  const { activeNotes } = useOutletContext();
 
   return (
     <>
+      <NoteSearch />
       <div className=" grid w-full gap-5">
         <NoteList
           ListTitle="Notes"

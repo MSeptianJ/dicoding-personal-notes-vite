@@ -1,19 +1,25 @@
 import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 
-const NoteSearch = ({ searchFunc }) => {
+const NoteSearch = () => {
+  const { handlerSearchNote } = useOutletContext();
+
   const searchHandler = (e) => {
-    searchFunc(e.target.value);
+    handlerSearchNote(e.target.value);
   };
 
   return (
-    <div className="grid w-full gap-2 rounded-sm bg-sub p-3">
-      <label className=" font-semibold uppercase" htmlFor="NoteSearch">
+    <div className="bg-primary m-auto grid w-2/4 gap-2 rounded-sm bg-sub p-3">
+      <label
+        className=" text-back font-semibold uppercase"
+        htmlFor="NoteSearch"
+      >
         Search Notes
       </label>
 
       <div className=" m-auto w-full">
         <input
-          className=" m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm"
+          className=" text-back m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm"
           type="text"
           name="note-search"
           id="NoteSearch"
