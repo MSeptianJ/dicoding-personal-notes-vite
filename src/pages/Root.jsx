@@ -1,4 +1,9 @@
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import NoteHeader from "../components/NoteHeader";
 import {
   archiveNote,
@@ -10,6 +15,7 @@ import {
 
 const Root = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -27,21 +33,21 @@ const Root = () => {
 
   const handlerArchiveNote = (id) => {
     archiveNote(id);
-    navigate("/");
+    navigate(location.pathname);
   };
 
   const handlerUnarchiveNote = (id) => {
     unarchiveNote(id);
-    navigate("/");
+    navigate(location.pathname);
   };
 
   const handlerDeleteNote = (id) => {
     deleteNote(id);
-    navigate("/");
+    navigate(location.pathname);
   };
 
   return (
-    <div className=" bg-back min-h-screen w-full overflow-y-auto">
+    <div className=" min-h-screen w-full overflow-y-auto bg-back">
       <NoteHeader />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
