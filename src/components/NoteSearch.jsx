@@ -9,9 +9,9 @@ const NoteSearch = () => {
   };
 
   return (
-    <div className="bg-primary m-auto grid w-2/4 gap-2 rounded-sm bg-sub p-3">
+    <div className="m-auto grid w-full gap-2 p-3">
       <label
-        className=" text-back font-semibold uppercase"
+        className=" font-semibold uppercase text-back"
         htmlFor="NoteSearch"
       >
         Search Notes
@@ -19,7 +19,7 @@ const NoteSearch = () => {
 
       <div className=" m-auto w-full">
         <input
-          className=" text-back m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm"
+          className=" m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm text-back"
           type="text"
           name="note-search"
           id="NoteSearch"
