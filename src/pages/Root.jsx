@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import NoteHeader from "../components/NoteHeader";
 import {
+  addNote,
   archiveNote,
   deleteNote,
   getActiveNotes,
@@ -13,6 +14,7 @@ import {
 
 const Root = () => {
   const [notes, setNotes] = useState(getAllNotes());
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -32,6 +34,11 @@ const Root = () => {
     }
 
     return note;
+  };
+
+  const handlerAddNote = (data) => {
+    addNote(data);
+    navigate("/");
   };
 
   const handlerSearchNote = (inputText) => {
@@ -63,6 +70,7 @@ const Root = () => {
             notes,
             activeNotes,
             archiveNotes,
+            handlerAddNote,
             handlerSearchNote,
             handlerUnarchiveNote,
             handlerArchiveNote,
