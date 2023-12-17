@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import "./assets/styles/index.css";
 import Root from "./pages/Root";
+import Archive from "./pages/archive";
 import ErrorPage from "./pages/error";
 import HomePage from "./pages/home";
 
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
       <Route index element={<HomePage />} />
+      <Route path="/archive" element={<Archive />} />
     </Route>,
   ),
 );
