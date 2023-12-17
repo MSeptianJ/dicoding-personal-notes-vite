@@ -25,7 +25,13 @@ const Root = () => {
   );
 
   const handlerGetNote = (id) => {
-    return getNote(id);
+    const note = getNote(id);
+
+    if (!note) {
+      throw new Error("Page Not Found");
+    }
+
+    return note;
   };
 
   const handlerSearchNote = (inputText) => {

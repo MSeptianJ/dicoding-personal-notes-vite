@@ -22,6 +22,7 @@ const router = createBrowserRouter(
       <Route path="/archive" element={<ArchivePage />} />
       <Route path="/submit" element={<SubmitPage />} />
       <Route path="/note/:id" element={<NotePage />} />
+      <Route path="/*" element={<ErrorPage />} />
     </Route>,
   ),
 );

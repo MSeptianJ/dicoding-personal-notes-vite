@@ -8,17 +8,19 @@ const ErrorPage = () => {
       <div className=" m-auto grid w-full gap-5">
         <div>
           <h3 className=" text-lg font-bold text-red-600">
-            {errorData.status || "Error"}
+            {errorData?.status || "Error"}
           </h3>
-          {errorData.status === 404 ? (
+          {errorData?.status === 404 ? (
             <p>Page Not Found</p>
           ) : (
-            <p>{errorData.message}</p>
+            <p>{errorData?.message}</p>
           )}
         </div>
 
-        <div className=" m-auto w-1/3 bg-gray-500 p-2 text-white">
-          <Link to={"/"}>Menu</Link>
+        <div className=" m-auto w-1/3 cursor-pointer bg-gray-500 text-white hover:bg-opacity-70">
+          <Link to={"/"} className=" block h-full w-full p-2">
+            Menu
+          </Link>
         </div>
       </div>
     </div>
