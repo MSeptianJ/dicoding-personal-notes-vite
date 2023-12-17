@@ -20,7 +20,7 @@ const NoteCardButton = ({ btnTitle, btnFunc, btnId, isFocus }) => {
 NoteCardButton.propTypes = {
   btnFunc: PropTypes.func,
   btnTitle: PropTypes.string,
-  btnId: PropTypes.number,
+  btnId: PropTypes.string,
   isFocus: PropTypes.bool,
 };
 
