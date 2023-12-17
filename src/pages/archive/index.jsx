@@ -3,7 +3,7 @@ import NoteSearch from "../../components/NoteSearch";
 import NoteList from "../../components/NotesComponent/NoteList";
 import { useOutletContext } from "react-router-dom";
 
-const Archive = () => {
+const ArchivePage = () => {
   const { archiveNotes } = useOutletContext();
 
   return (
@@ -22,8 +22,8 @@ const Archive = () => {
   );
 };
 
-Archive.propTypes = {
+ArchivePage.propTypes = {
   text: PropTypes.func,
 };
 
-export default Archive;
+export default ArchivePage;

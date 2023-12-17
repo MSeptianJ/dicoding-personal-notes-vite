@@ -1,21 +1,18 @@
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { useState } from "react";
+import { Outlet, useSearchParams } from "react-router-dom";
 import NoteHeader from "../components/NoteHeader";
 import {
   archiveNote,
   deleteNote,
   getActiveNotes,
+  getAllNotes,
   getArchivedNotes,
+  getNote,
   unarchiveNote,
 } from "../utils/local-data";
 
 const Root = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [notes, setNotes] = useState(getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -27,23 +24,27 @@ const Root = () => {
     note.title.toLowerCase().includes(query),
   );
 
+  const handlerGetNote = (id) => {
+    return getNote(id);
+  };
+
   const handlerSearchNote = (inputText) => {
     setSearchParams({ query: inputText.toLowerCase().trim() });
   };
 
   const handlerArchiveNote = (id) => {
     archiveNote(id);
-    navigate(location.pathname);
+    setNotes(getAllNotes());
   };
 
   const handlerUnarchiveNote = (id) => {
     unarchiveNote(id);
-    navigate(location.pathname);
+    setNotes(getAllNotes());
   };
 
   const handlerDeleteNote = (id) => {
     deleteNote(id);
-    navigate(location.pathname);
+    setNotes(getAllNotes());
   };
 
   return (
@@ -53,12 +54,14 @@ const Root = () => {
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
           context={{
+            notes,
             activeNotes,
             archiveNotes,
             handlerSearchNote,
             handlerUnarchiveNote,
             handlerArchiveNote,
             handlerDeleteNote,
+            handlerGetNote,
           }}
         />
       </div>
