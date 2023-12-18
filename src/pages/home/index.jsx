@@ -1,8 +1,7 @@
-import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import NoteSearch from "../../components/NoteSearch";
-import NoteSubmitBtn from "../../components/NoteSubmitBtn";
-import NoteList from "../../components/NotesComponent/NoteList";
+import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
+import NoteCardList from "../../components/card/NoteCardList";
 
 const HomePage = () => {
   const { activeNotes } = useOutletContext();
@@ -17,15 +16,14 @@ const HomePage = () => {
           <NoteSubmitBtn />
         </div>
       </div>
+
       <div className=" grid w-full gap-5">
-        <NoteList ListTitle="Notes" ListNotes={activeNotes} />
+        <NoteCardList ListTitle="Notes" ListNotes={activeNotes} />
       </div>
     </>
   );
 };
 
-HomePage.propTypes = {
-  text: PropTypes.func,
-};
+HomePage.propTypes = {};
 
 export default HomePage;

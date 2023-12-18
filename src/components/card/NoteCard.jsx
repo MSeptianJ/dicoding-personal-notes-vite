@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { MdArchive, MdDelete, MdUnarchive } from "react-icons/md";
 import { Link, useOutletContext } from "react-router-dom";
 import NoteCardBody from "./NoteCardBody";
-import NoteCardButton from "./NoteCardButton";
+import NoteCardButton from "../button/NoteCardButton";
 
 const NoteCard = ({ noteData }) => {
   const { handlerArchiveNote, handlerUnarchiveNote, handlerDeleteNote } =
@@ -57,9 +57,6 @@ const NoteCard = ({ noteData }) => {
 
 NoteCard.propTypes = {
   noteData: PropTypes.object,
-  deleteFunc: PropTypes.func,
-  archiveFunc: PropTypes.func,
-  activateFunc: PropTypes.func,
 };
 
 export default NoteCard;

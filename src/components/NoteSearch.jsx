@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
@@ -32,8 +31,6 @@ const NoteSearch = () => {
   );
 };
 
-NoteSearch.propTypes = {
-  searchFunc: PropTypes.func,
-};
+NoteSearch.propTypes = {};
 
 export default NoteSearch;

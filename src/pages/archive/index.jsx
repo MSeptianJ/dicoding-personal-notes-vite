@@ -1,8 +1,7 @@
-import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
 import NoteSearch from "../../components/NoteSearch";
-import NoteSubmitBtn from "../../components/NoteSubmitBtn";
-import NoteList from "../../components/NotesComponent/NoteList";
+import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
+import NoteCardList from "../../components/card/NoteCardList";
 
 const ArchivePage = () => {
   const { archiveNotes } = useOutletContext();
@@ -17,15 +16,14 @@ const ArchivePage = () => {
           <NoteSubmitBtn />
         </div>
       </div>
+
       <div className=" grid w-full gap-5">
-        <NoteList ListTitle="Archive" ListNotes={archiveNotes} />
+        <NoteCardList ListTitle="Archive" ListNotes={archiveNotes} />
       </div>
     </>
   );
 };
 
-ArchivePage.propTypes = {
-  text: PropTypes.func,
-};
+ArchivePage.propTypes = {};
 
 export default ArchivePage;

@@ -1,6 +1,6 @@
 import { MdArchive, MdDelete, MdUnarchive } from "react-icons/md";
 import { useOutletContext, useParams } from "react-router-dom";
-import NoteCardButton from "../../components/NotesComponent/NoteCardButton";
+import NoteCardButton from "../../components/button/NoteCardButton";
 import { showFormattedDate } from "../../utils";
 
 const NotePage = () => {

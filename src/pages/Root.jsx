@@ -5,7 +5,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import NoteHeader from "../components/NoteHeader";
+import NoteHeader from "../components/header/NoteHeader";
 import {
   addNote,
   archiveNote,
