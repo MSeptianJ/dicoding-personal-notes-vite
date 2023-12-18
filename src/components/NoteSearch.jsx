@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useOutletContext } from "react-router-dom";
+import { FaSearch } from "react-icons/fa";
 
 const NoteSearch = () => {
   const { handlerSearchNote } = useOutletContext();
@@ -11,9 +12,10 @@ const NoteSearch = () => {
   return (
     <div className="m-auto grid w-full gap-2 p-3">
       <label
-        className=" font-semibold uppercase text-back"
+        className=" flex items-center gap-2 font-semibold uppercase text-back"
         htmlFor="NoteSearch"
       >
+        <FaSearch />
         Search Notes
       </label>
 

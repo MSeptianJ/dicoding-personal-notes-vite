@@ -9,7 +9,7 @@ const HomePage = () => {
 
   return (
     <>
-      <div className=" grid w-full grid-cols-6 items-center rounded-sm bg-primary">
+      <div className=" grid w-full grid-cols-6 items-center rounded-sm bg-primary shadow-lg">
         <div className=" col-span-4 w-full lg:col-span-5">
           <NoteSearch />
         </div>
