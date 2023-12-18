@@ -20,10 +20,13 @@ import {
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
+  // State
   const [notes, setNotes] = useState(getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
+  // Variables
   const navList = [
     {
       text: "Home",
@@ -43,6 +46,7 @@ const App = () => {
     note.title.toLowerCase().includes(query),
   );
 
+  // Functions
   const handlerGetNote = (id) => {
     const note = getNote(id);
 

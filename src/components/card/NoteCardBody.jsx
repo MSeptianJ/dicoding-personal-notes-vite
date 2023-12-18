@@ -1,3 +1,4 @@
+import parser from "html-react-parser";
 import PropTypes from "prop-types";
 import { showFormattedDate } from "../../utils";
 
@@ -19,8 +20,8 @@ const NoteCardBody = ({ noteData }) => {
       <div className=" m-auto w-full">
         <p className=" py-3 text-sm">
           {noteData.body.length >= 200
-            ? noteData.body.substring(0, 180) + "..."
-            : noteData.body}
+            ? parser(noteData.body.substring(0, 180) + "...")
+            : parser(noteData.body)}
         </p>
       </div>
     </>

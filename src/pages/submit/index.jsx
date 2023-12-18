@@ -12,7 +12,7 @@ const SubmitPage = () => {
   };
 
   const descHandler = (e) => {
-    setBody(e.target.value);
+    setBody(e.target.innerHTML);
   };
 
   const submitHandler = (e) => {
@@ -49,14 +49,11 @@ const SubmitPage = () => {
           required
         />
 
-        <textarea
-          name=""
+        <div
           className=" row-span-3 block h-full w-full rounded-sm border border-back bg-transparent p-2 text-sm"
-          placeholder="Body note"
-          value={body}
-          onChange={descHandler}
-          required
-        ></textarea>
+          onInput={descHandler}
+          contentEditable
+        ></div>
 
         <input
           type="submit"

@@ -1,3 +1,4 @@
+import parser from "html-react-parser";
 import { MdArchive, MdDelete, MdUnarchive } from "react-icons/md";
 import { useOutletContext, useParams } from "react-router-dom";
 import NoteCardButton from "../../components/button/NoteCardButton";
@@ -26,7 +27,7 @@ const NotePage = () => {
       </div>
 
       <div className=" m-auto mb-5 w-full border border-secondary p-6 shadow-md ">
-        <p className=" py-3 text-lg">{noteData?.body}</p>
+        <p className=" py-3 text-lg">{parser(noteData?.body)}</p>
       </div>
 
       <div className=" grid h-14 w-full grid-cols-2 gap-2 bg-primary p-2 text-back">
