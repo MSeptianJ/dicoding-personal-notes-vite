@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { FaSearch } from "react-icons/fa";
 
 const NoteSearch = ({ searchFunc }) => {
   const searchHandler = (e) => {
@@ -6,14 +7,18 @@ const NoteSearch = ({ searchFunc }) => {
   };
 
   return (
-    <div className="grid w-full gap-2 rounded-sm bg-sub p-3">
-      <label className=" font-semibold uppercase" htmlFor="NoteSearch">
+    <div className="m-auto grid w-full gap-2 p-3">
+      <label
+        className=" flex items-center gap-2 font-semibold uppercase text-back"
+        htmlFor="NoteSearch"
+      >
+        <FaSearch />
         Search Notes
       </label>
 
       <div className=" m-auto w-full">
         <input
-          className=" m-auto w-full rounded-md border-2 border-accent bg-transparent p-2 text-sm"
+          className=" m-auto w-full rounded-md border border-back bg-transparent p-2 text-sm text-back"
           type="text"
           name="note-search"
           id="NoteSearch"
@@ -25,7 +30,7 @@ const NoteSearch = ({ searchFunc }) => {
 };
 
 NoteSearch.propTypes = {
-  searchFunc: PropTypes.func,
+  searchFunc: PropTypes.func.isRequired,
 };
 
 export default NoteSearch;
