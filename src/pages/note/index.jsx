@@ -26,24 +26,24 @@ const NotePage = () => {
         <p className="text-sm">{showFormattedDate(noteData?.createdAt)}</p>
       </div>
 
-      <div className=" m-auto mb-5 w-full border border-secondary p-6 shadow-md ">
-        <p className=" py-3 text-lg">{parser(noteData?.body)}</p>
+      <div className=" m-auto mb-5 w-full border border-secondary p-6 py-3 text-lg shadow-md ">
+        {parser(noteData?.body)}
       </div>
 
       <div className=" grid h-14 w-full grid-cols-2 gap-2 bg-primary p-2 text-back">
-        {!noteData.archived ? (
+        {!noteData?.archived ? (
           <>
             <NoteCardButton
               btnTitle="Archive"
               btnFunc={handlerArchiveNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdArchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdDelete />}
             />
           </>
@@ -52,14 +52,14 @@ const NotePage = () => {
             <NoteCardButton
               btnTitle="Unarchive"
               btnFunc={handlerUnarchiveNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdUnarchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdDelete />}
             />
           </>
