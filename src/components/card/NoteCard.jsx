@@ -12,26 +12,26 @@ const NoteCard = ({
 }) => {
   return (
     <div className="group flex w-full flex-col justify-between gap-3 rounded-sm bg-primary p-2 text-back shadow-lg shadow-[rgba(0,0,0,0.3)] transition-all duration-200 hover:-translate-y-4 hover:bg-secondary">
-      <Link to={`/note/${noteData.id}`} className=" h-full w-full">
+      <Link to={`/note/${noteData?.id}`} className=" h-full w-full">
         <div className=" w-full px-2">
           <NoteCardBody noteData={noteData} />
         </div>
       </Link>
 
       <div className=" grid w-full grid-cols-2 gap-2">
-        {!noteData.archived ? (
+        {!noteData?.archived ? (
           <>
             <NoteCardButton
               btnTitle="Archive"
               btnFunc={handlerArchiveNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdArchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdDelete />}
             />
           </>
@@ -40,14 +40,14 @@ const NoteCard = ({
             <NoteCardButton
               btnTitle="Unarchive"
               btnFunc={handlerUnarchiveNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdUnarchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
-              btnId={noteData.id}
+              btnId={noteData?.id}
               btnIcon={<MdDelete />}
             />
           </>
