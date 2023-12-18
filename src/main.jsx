@@ -6,8 +6,8 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+import App from "./App";
 import "./assets/styles/index.css";
-import Root from "./pages/Root";
 import ArchivePage from "./pages/archive";
 import ErrorPage from "./pages/error";
 import HomePage from "./pages/home";
@@ -16,7 +16,7 @@ import SubmitPage from "./pages/submit";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+    <Route path="/" element={<App />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />} />
       <Route index element={<HomePage />} />
       <Route path="/archive" element={<ArchivePage />} />

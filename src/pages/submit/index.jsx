@@ -68,6 +68,4 @@ const SubmitPage = () => {
   );
 };
 
-SubmitPage.propTypes = {};
-
 export default SubmitPage;

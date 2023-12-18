@@ -68,6 +68,4 @@ const NotePage = () => {
   );
 };
 
-NotePage.propTypes = {};
-
 export default NotePage;

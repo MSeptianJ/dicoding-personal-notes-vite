@@ -4,13 +4,19 @@ import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
 import NoteCardList from "../../components/card/NoteCardList";
 
 const HomePage = () => {
-  const { activeNotes } = useOutletContext();
+  const {
+    activeNotes,
+    handlerSearchNote,
+    handlerArchiveNote,
+    handlerUnarchiveNote,
+    handlerDeleteNote,
+  } = useOutletContext();
 
   return (
     <>
       <div className=" grid w-full grid-cols-6 items-center rounded-sm bg-primary shadow-lg">
         <div className=" col-span-4 w-full lg:col-span-5">
-          <NoteSearch />
+          <NoteSearch searchFunc={handlerSearchNote} />
         </div>
         <div className=" col-span-2 h-full w-full lg:col-span-1">
           <NoteSubmitBtn />
@@ -18,12 +24,16 @@ const HomePage = () => {
       </div>
 
       <div className=" grid w-full gap-5">
-        <NoteCardList ListTitle="Notes" ListNotes={activeNotes} />
+        <NoteCardList
+          ListTitle="Notes"
+          ListNotes={activeNotes}
+          handlerArchiveNote={handlerArchiveNote}
+          handlerUnarchiveNote={handlerUnarchiveNote}
+          handlerDeleteNote={handlerDeleteNote}
+        />
       </div>
     </>
   );
 };
-
-HomePage.propTypes = {};
 
 export default HomePage;

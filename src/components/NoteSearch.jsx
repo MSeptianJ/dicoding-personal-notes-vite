@@ -1,11 +1,9 @@
-import { useOutletContext } from "react-router-dom";
+import PropTypes from "prop-types";
 import { FaSearch } from "react-icons/fa";
 
-const NoteSearch = () => {
-  const { handlerSearchNote } = useOutletContext();
-
+const NoteSearch = ({ searchFunc }) => {
   const searchHandler = (e) => {
-    handlerSearchNote(e.target.value);
+    searchFunc(e.target.value);
   };
 
   return (
@@ -31,6 +29,8 @@ const NoteSearch = () => {
   );
 };
 
-NoteSearch.propTypes = {};
+NoteSearch.propTypes = {
+  searchFunc: PropTypes.func.isRequired,
+};
 
 export default NoteSearch;

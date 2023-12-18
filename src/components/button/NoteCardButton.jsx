@@ -21,11 +21,11 @@ const NoteCardButton = ({ btnTitle, btnFunc, btnId, isFocus, btnIcon }) => {
 };
 
 NoteCardButton.propTypes = {
-  btnFunc: PropTypes.func,
-  btnTitle: PropTypes.string,
-  btnId: PropTypes.string,
+  btnFunc: PropTypes.func.isRequired,
+  btnTitle: PropTypes.string.isRequired,
+  btnId: PropTypes.string.isRequired,
   isFocus: PropTypes.bool,
-  btnIcon: PropTypes.object,
+  btnIcon: PropTypes.object.isRequired,
 };
 
 export default NoteCardButton;

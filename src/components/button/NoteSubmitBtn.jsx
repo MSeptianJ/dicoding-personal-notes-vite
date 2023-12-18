@@ -15,6 +15,4 @@ const NoteSubmitBtn = () => {
   );
 };
 
-NoteSubmitBtn.propTypes = {};
-
 export default NoteSubmitBtn;

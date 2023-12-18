@@ -28,7 +28,7 @@ const NoteCardBody = ({ noteData }) => {
 };
 
 NoteCardBody.propTypes = {
-  noteData: PropTypes.object,
+  noteData: PropTypes.object.isRequired,
 };
 
 export default NoteCardBody;

@@ -5,7 +5,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import NoteHeader from "../components/header/NoteHeader";
+import NoteHeader from "./components/header/NoteHeader";
 import {
   addNote,
   archiveNote,
@@ -15,14 +15,25 @@ import {
   getArchivedNotes,
   getNote,
   unarchiveNote,
-} from "../utils/local-data";
+} from "./utils/local-data";
 
-const Root = () => {
-  const [notes, setNotes] = useState(getAllNotes());
+const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [notes, setNotes] = useState(getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
+
+  const navList = [
+    {
+      text: "Home",
+      url: "/",
+    },
+    {
+      text: "Archive",
+      url: "/archive",
+    },
+  ];
 
   const activeNotes = getActiveNotes().filter((note) =>
     note.title.toLowerCase().includes(query),
@@ -86,7 +97,7 @@ const Root = () => {
 
   return (
     <div className=" min-h-screen w-full overflow-y-auto bg-back">
-      <NoteHeader />
+      <NoteHeader navList={navList} />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
@@ -107,6 +118,4 @@ const Root = () => {
   );
 };
 
-Root.propTypes = {};
-
-export default Root;
+export default App;

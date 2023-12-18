@@ -27,6 +27,4 @@ const ErrorPage = () => {
   );
 };
 
-ErrorPage.propTypes = {};
-
 export default ErrorPage;
