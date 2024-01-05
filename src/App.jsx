@@ -16,10 +16,12 @@ import {
   getNote,
   unarchiveNote,
 } from "./utils/local-data";
+import { getAccessToken } from "./utils/network-data";
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const user = getAccessToken();
 
   // State
   const [notes, setNotes] = useState(getAllNotes());
@@ -35,6 +37,14 @@ const App = () => {
     {
       text: "Archive",
       url: "/archive",
+    },
+    {
+      text: "Log In",
+      url: "/login",
+    },
+    {
+      text: "Register",
+      url: "/register",
     },
   ];
 
@@ -101,7 +111,7 @@ const App = () => {
 
   return (
     <div className=" min-h-screen w-full overflow-y-auto bg-back">
-      <NoteHeader navList={navList} />
+      <NoteHeader navList={user ? navList.slice(0, 2) : navList.slice(2, 4)} />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
