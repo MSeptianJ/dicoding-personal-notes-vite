@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   Route,
   RouterProvider,
@@ -6,7 +6,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import App from "./App";
-import { DataProvider } from "./context/DataContext";
+import { DataProvider } from "./contexts/DataContext";
 import ArchivePage from "./pages/archive";
 import ErrorPage from "./pages/error";
 import HomePage from "./pages/home";
@@ -17,7 +17,18 @@ import SubmitPage from "./pages/submit";
 import { getAccessToken } from "./utils/network-data";
 
 const Root = () => {
-  const [isUser] = useState(() => getAccessToken());
+  const [user, setUser] = useState(() => getAccessToken());
+
+  const loginClientSide = useCallback((token) => {
+    setUser(token);
+  }, []);
+
+  const contextValue = useMemo(() => {
+    return {
+      user,
+      loginClientSide,
+    };
+  }, [user, loginClientSide]);
 
   const withUserRouter = createBrowserRouter(
     createRoutesFromElements(
@@ -36,23 +47,23 @@ const Root = () => {
     createRoutesFromElements(
       <Route element={<App />} errorElement={<ErrorPage />}>
         <Route errorElement={<ErrorPage />} />
-        <Route path="/*" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route index element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/*" element={<LoginPage />} />
       </Route>,
     ),
   );
 
-  if (!isUser) {
+  if (!user) {
     return (
-      <DataProvider value={"hai"}>
+      <DataProvider value={contextValue}>
         <RouterProvider router={noUserRouter} />
       </DataProvider>
     );
   }
 
   return (
-    <DataProvider value={"hai"}>
+    <DataProvider value={contextValue}>
       <RouterProvider router={withUserRouter} />;
     </DataProvider>
   );
