@@ -8,17 +8,16 @@ import {
 import NoteHeader from "./components/header/NoteHeader";
 import { GetAuthContexts } from "./contexts/AuthContext";
 import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
+import { addNote, getNote } from "./utils/local-data";
 import {
-  addNote,
   archiveNote,
   deleteNote,
   getActiveNotes,
-  getAllNotes,
   getArchivedNotes,
-  getNote,
+  getUserLogged,
+  putAccessToken,
   unarchiveNote,
-} from "./utils/local-data";
-import { getUserLogged, putAccessToken } from "./utils/network-data";
+} from "./utils/network-data";
 
 const App = () => {
   const navigate = useNavigate();
@@ -26,9 +25,10 @@ const App = () => {
   const { loginClientSide } = GetAuthContexts();
 
   // State
-  const [notes, setNotes] = useState(() => getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
+  const [activeNotes, setActiveNotes] = useState([]);
+  const [archiveNotes, setArchiveNotes] = useState([]);
 
   // Variables
   const navList = [
@@ -54,11 +54,11 @@ const App = () => {
     },
   ];
 
-  const activeNotes = getActiveNotes().filter((note) =>
+  const filteredActiveNotes = activeNotes.filter((note) =>
     note.title.toLowerCase().includes(query),
   );
 
-  const archiveNotes = getArchivedNotes().filter((note) =>
+  const filteredArchiveNotes = archiveNotes.filter((note) =>
     note.title.toLowerCase().includes(query),
   );
 
@@ -82,9 +82,11 @@ const App = () => {
     setSearchParams({ query: inputText.toLowerCase().trim() });
   };
 
-  const handlerArchiveNote = (id) => {
+  const handlerArchiveNote = async (id) => {
     archiveNote(id);
-    setNotes(getAllNotes());
+
+    const { data } = await getActiveNotes();
+    setActiveNotes(data);
 
     const notePath = location.pathname.includes("/note");
 
@@ -93,9 +95,11 @@ const App = () => {
     }
   };
 
-  const handlerUnarchiveNote = (id) => {
+  const handlerUnarchiveNote = async (id) => {
     unarchiveNote(id);
-    setNotes(getAllNotes());
+
+    const { data } = await getArchivedNotes(id);
+    setArchiveNotes(data);
 
     const notePath = location.pathname.includes("/note");
 
@@ -104,9 +108,14 @@ const App = () => {
     }
   };
 
-  const handlerDeleteNote = (id) => {
+  const handlerDeleteNote = async (id) => {
     deleteNote(id);
-    setNotes(getAllNotes());
+
+    const { data: activeData } = await getActiveNotes();
+    setActiveNotes(activeData);
+
+    const { data: archiveData } = await getActiveNotes();
+    setActiveNotes(archiveData);
 
     const notePath = location.pathname.includes("/note");
 
@@ -135,7 +144,6 @@ const App = () => {
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
           context={{
-            notes,
             activeNotes,
             archiveNotes,
             handlerAddNote,
@@ -145,6 +153,10 @@ const App = () => {
             handlerDeleteNote,
             handlerGetNote,
             onloginSuccess,
+            filteredActiveNotes,
+            setActiveNotes,
+            filteredArchiveNotes,
+            setArchiveNotes,
           }}
         />
       </div>
