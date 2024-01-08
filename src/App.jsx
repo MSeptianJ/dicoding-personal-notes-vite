@@ -8,8 +8,9 @@ import {
 import NoteHeader from "./components/header/NoteHeader";
 import { GetAuthContexts } from "./contexts/AuthContext";
 import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
-import { addNote, getNote } from "./utils/local-data";
+import { getNote } from "./utils/local-data";
 import {
+  addNote,
   archiveNote,
   deleteNote,
   getActiveNotes,
@@ -73,8 +74,8 @@ const App = () => {
     return note;
   };
 
-  const handlerAddNote = (data) => {
-    addNote(data);
+  const handlerAddNote = async (data) => {
+    await addNote(data);
     navigate("/");
   };
 
