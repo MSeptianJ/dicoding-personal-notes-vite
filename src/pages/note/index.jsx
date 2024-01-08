@@ -1,7 +1,7 @@
 import parser from "html-react-parser";
-import { MdArchive, MdDelete, MdUnarchive } from "react-icons/md";
 import { useOutletContext, useParams } from "react-router-dom";
 import NoteCardButton from "../../components/button/NoteCardButton";
+import { IconArchive, IconDelete, IconUnarchive } from "../../icon";
 import { showFormattedDate } from "../../utils";
 
 const NotePage = () => {
@@ -37,14 +37,14 @@ const NotePage = () => {
               btnTitle="Archive"
               btnFunc={handlerArchiveNote}
               btnId={noteData?.id}
-              btnIcon={<MdArchive />}
+              btnIcon={<IconArchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
               btnId={noteData?.id}
-              btnIcon={<MdDelete />}
+              btnIcon={<IconDelete />}
             />
           </>
         ) : (
@@ -53,14 +53,14 @@ const NotePage = () => {
               btnTitle="Unarchive"
               btnFunc={handlerUnarchiveNote}
               btnId={noteData?.id}
-              btnIcon={<MdUnarchive />}
+              btnIcon={<IconUnarchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
               btnId={noteData?.id}
-              btnIcon={<MdDelete />}
+              btnIcon={<IconDelete />}
             />
           </>
         )}

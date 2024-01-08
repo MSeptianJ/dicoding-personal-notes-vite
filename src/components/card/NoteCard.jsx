@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
-import { MdArchive, MdDelete, MdUnarchive } from "react-icons/md";
 import { Link } from "react-router-dom";
-import NoteCardBody from "./NoteCardBody";
+import { IconArchive, IconDelete, IconUnarchive } from "../../icon";
 import NoteCardButton from "../button/NoteCardButton";
+import NoteCardBody from "./NoteCardBody";
 
 const NoteCard = ({
   noteData,
@@ -25,14 +25,14 @@ const NoteCard = ({
               btnTitle="Archive"
               btnFunc={handlerArchiveNote}
               btnId={noteData?.id}
-              btnIcon={<MdArchive />}
+              btnIcon={<IconArchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
               btnId={noteData?.id}
-              btnIcon={<MdDelete />}
+              btnIcon={<IconDelete />}
             />
           </>
         ) : (
@@ -41,14 +41,14 @@ const NoteCard = ({
               btnTitle="Unarchive"
               btnFunc={handlerUnarchiveNote}
               btnId={noteData?.id}
-              btnIcon={<MdUnarchive />}
+              btnIcon={<IconUnarchive />}
               isFocus
             />
             <NoteCardButton
               btnTitle="Delete"
               btnFunc={handlerDeleteNote}
               btnId={noteData?.id}
-              btnIcon={<MdDelete />}
+              btnIcon={<IconDelete />}
             />
           </>
         )}

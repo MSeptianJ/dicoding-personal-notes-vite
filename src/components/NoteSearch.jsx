@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { FaSearch } from "react-icons/fa";
+import { IconSearch } from "../icon";
 
 const NoteSearch = ({ searchFunc }) => {
   const searchHandler = (e) => {
@@ -12,7 +12,7 @@ const NoteSearch = ({ searchFunc }) => {
         className=" flex items-center gap-2 font-semibold uppercase text-back"
         htmlFor="NoteSearch"
       >
-        <FaSearch />
+        <IconSearch />
         Search Notes
       </label>
 

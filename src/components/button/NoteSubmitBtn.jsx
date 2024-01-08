@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MdAddBox } from "react-icons/md";
+import { IconAddNote } from "../../icon";
 
 const NoteSubmitBtn = () => {
   return (
@@ -9,7 +9,7 @@ const NoteSubmitBtn = () => {
         className=" m-auto flex h-full w-full flex-col items-center justify-center gap-3 p-3 text-lg text-back lg:flex-row"
       >
         <h4 className="font-semibold uppercase text-back">Add New</h4>
-        <MdAddBox />
+        <IconAddNote />
       </Link>
     </div>
   );
