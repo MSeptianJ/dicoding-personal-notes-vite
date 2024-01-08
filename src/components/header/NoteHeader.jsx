@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import DataContext from "../../contexts/DataContext";
-import NoteNavigation from "./NoteNavigation";
+import { GetAuthContexts } from "../../contexts/AuthContext";
 import { IconLogOut } from "../../icon";
+import NoteNavigation from "./NoteNavigation";
 
 const NoteHeader = ({ navList, logOutFunc }) => {
-  const { authedUser } = useContext(DataContext);
+  const { authedUser } = GetAuthContexts();
 
   return (
     <header className=" flex w-full items-center justify-between border-b-2 border-primary p-1 text-center font-bold uppercase">

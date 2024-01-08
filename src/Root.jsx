@@ -1,51 +1,19 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { RouterProvider } from "react-router-dom";
-import { DataProvider } from "./contexts/DataContext";
+import { GetAuthContexts } from "./contexts/AuthContext";
 import { noUserRouter, withUserRouter } from "./router";
-import { getUserLogged } from "./utils/network-data";
 
 const Root = () => {
-  const [authedUser, setUser] = useState();
-  const [init, setInit] = useState(true);
-
-  const loginClientSide = useCallback((data) => {
-    setUser(data);
-  }, []);
-
-  const checkAuthedUser = useCallback(async () => {
-    const { data } = await getUserLogged();
-    setUser(data);
-    setInit(false);
-  }, []);
-
-  const contextValue = useMemo(() => {
-    return {
-      authedUser,
-      loginClientSide,
-    };
-  }, [authedUser, loginClientSide]);
-
-  useEffect(() => {
-    checkAuthedUser();
-  }, [checkAuthedUser]);
+  const { init, authedUser } = GetAuthContexts();
 
   if (init) {
     return null;
   }
 
   if (!authedUser) {
-    return (
-      <DataProvider value={contextValue}>
-        <RouterProvider router={noUserRouter} />
-      </DataProvider>
-    );
+    return <RouterProvider router={noUserRouter} />;
   }
 
-  return (
-    <DataProvider value={contextValue}>
-      <RouterProvider router={withUserRouter} />;
-    </DataProvider>
-  );
+  return <RouterProvider router={withUserRouter} />;
 };
 
 Root.propTypes = {};

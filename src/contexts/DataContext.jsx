@@ -1,8 +1,12 @@
-import React from "react";
+import PropTypes from "prop-types";
+import { AuthContextProvider } from "./AuthContext";
 
-const DataContext = React.createContext();
+export const DataContextProvider = ({ children }) => {
+  return <AuthContextProvider>{children}</AuthContextProvider>;
+};
 
-export const DataProvider = DataContext.Provider;
-export const DataConsumer = DataContext.Consumer;
+DataContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
-export default DataContext;
+export default DataContextProvider;

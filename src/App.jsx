@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   Outlet,
   useLocation,
@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import NoteHeader from "./components/header/NoteHeader";
-import DataContext from "./contexts/DataContext";
+import { GetAuthContexts } from "./contexts/AuthContext";
 import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
 import {
   addNote,
@@ -23,7 +23,7 @@ import { getUserLogged, putAccessToken } from "./utils/network-data";
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loginClientSide } = useContext(DataContext);
+  const { loginClientSide } = GetAuthContexts();
 
   // State
   const [notes, setNotes] = useState(() => getAllNotes());
