@@ -1,16 +1,28 @@
+import { useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import NoteSearch from "../../components/NoteSearch";
 import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
 import NoteCardList from "../../components/card/NoteCardList";
+import { getArchivedNotes } from "../../utils/network-data";
 
 const ArchivePage = () => {
   const {
-    archiveNotes,
     handlerSearchNote,
     handlerArchiveNote,
     handlerUnarchiveNote,
     handlerDeleteNote,
+    filteredArchiveNotes,
+    setArchiveNotes,
   } = useOutletContext();
+
+  const checkUserArchiveNotes = useCallback(async () => {
+    const { data } = await getArchivedNotes();
+    setArchiveNotes(data);
+  }, [filteredArchiveNotes, setArchiveNotes]); // eslint-disable-line
+
+  useEffect(() => {
+    checkUserArchiveNotes();
+  }, [checkUserArchiveNotes]);
 
   return (
     <>
@@ -26,7 +38,7 @@ const ArchivePage = () => {
       <div className=" grid w-full gap-5">
         <NoteCardList
           ListTitle="Archive"
-          ListNotes={archiveNotes}
+          ListNotes={filteredArchiveNotes}
           handlerArchiveNote={handlerArchiveNote}
           handlerUnarchiveNote={handlerUnarchiveNote}
           handlerDeleteNote={handlerDeleteNote}
