@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Outlet,
   useLocation,
@@ -6,6 +6,8 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import NoteHeader from "./components/header/NoteHeader";
+import DataContext from "./contexts/DataContext";
+import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
 import {
   addNote,
   archiveNote,
@@ -16,15 +18,15 @@ import {
   getNote,
   unarchiveNote,
 } from "./utils/local-data";
-import { getAccessToken } from "./utils/network-data";
+import { getUserLogged, putAccessToken } from "./utils/network-data";
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = getAccessToken();
+  const { loginClientSide } = useContext(DataContext);
 
   // State
-  const [notes, setNotes] = useState(getAllNotes());
+  const [notes, setNotes] = useState(() => getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
@@ -33,18 +35,22 @@ const App = () => {
     {
       text: "Home",
       url: "/",
+      icon: <IconHome />,
     },
     {
       text: "Archive",
       url: "/archive",
+      icon: <IconArchive />,
     },
     {
       text: "Log In",
-      url: "/login",
+      url: "/",
+      icon: <IconLogIn />,
     },
     {
       text: "Register",
       url: "/register",
+      icon: <IconRegister />,
     },
   ];
 
@@ -109,9 +115,22 @@ const App = () => {
     }
   };
 
+  const onloginSuccess = async ({ accessToken }) => {
+    navigate("/");
+    putAccessToken(accessToken);
+    const { data } = await getUserLogged();
+    loginClientSide(data);
+  };
+
+  const onLogOut = () => {
+    navigate("/login");
+    putAccessToken("");
+    loginClientSide();
+  };
+
   return (
     <div className=" min-h-screen w-full overflow-y-auto bg-back">
-      <NoteHeader navList={user ? navList.slice(0, 2) : navList.slice(2, 4)} />
+      <NoteHeader navList={navList} logOutFunc={onLogOut} />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
@@ -125,6 +144,7 @@ const App = () => {
             handlerArchiveNote,
             handlerDeleteNote,
             handlerGetNote,
+            onloginSuccess,
           }}
         />
       </div>
