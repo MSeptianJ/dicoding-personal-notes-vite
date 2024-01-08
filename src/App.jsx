@@ -8,13 +8,13 @@ import {
 import NoteHeader from "./components/header/NoteHeader";
 import { GetAuthContexts } from "./contexts/AuthContext";
 import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
-import { getNote } from "./utils/local-data";
 import {
   addNote,
   archiveNote,
   deleteNote,
   getActiveNotes,
   getArchivedNotes,
+  getNote,
   getUserLogged,
   putAccessToken,
   unarchiveNote,
@@ -64,14 +64,14 @@ const App = () => {
   );
 
   // Functions
-  const handlerGetNote = (id) => {
-    const note = getNote(id);
+  const handlerGetNote = async (id) => {
+    const { error, data } = await getNote(id);
 
-    if (!note) {
+    if (error) {
       throw new Error("Page Not Found");
     }
 
-    return note;
+    return data;
   };
 
   const handlerAddNote = async (data) => {
