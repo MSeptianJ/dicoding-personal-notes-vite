@@ -1,16 +1,28 @@
+import { useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import NoteSearch from "../../components/NoteSearch";
 import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
 import NoteCardList from "../../components/card/NoteCardList";
+import { getActiveNotes } from "../../utils/network-data";
 
 const HomePage = () => {
   const {
-    activeNotes,
     handlerSearchNote,
     handlerArchiveNote,
     handlerUnarchiveNote,
     handlerDeleteNote,
+    filteredActiveNotes,
+    setActiveNotes,
   } = useOutletContext();
+
+  const checkUserNotes = useCallback(async () => {
+    const { data } = await getActiveNotes();
+    setActiveNotes(data);
+  }, [filteredActiveNotes, setActiveNotes]); // eslint-disable-line
+
+  useEffect(() => {
+    checkUserNotes();
+  }, [checkUserNotes]);
 
   return (
     <>
@@ -26,7 +38,7 @@ const HomePage = () => {
       <div className=" grid w-full gap-5">
         <NoteCardList
           ListTitle="Notes"
-          ListNotes={activeNotes}
+          ListNotes={filteredActiveNotes}
           handlerArchiveNote={handlerArchiveNote}
           handlerUnarchiveNote={handlerUnarchiveNote}
           handlerDeleteNote={handlerDeleteNote}
