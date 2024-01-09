@@ -14,7 +14,6 @@ import {
   deleteNote,
   getActiveNotes,
   getArchivedNotes,
-  getNote,
   getUserLogged,
   putAccessToken,
   unarchiveNote,
@@ -64,15 +63,6 @@ const App = () => {
   );
 
   // Functions
-  const handlerGetNote = async (id) => {
-    const { error, data } = await getNote(id);
-
-    if (error) {
-      throw new Error("Page Not Found");
-    }
-
-    return data;
-  };
 
   const handlerAddNote = async (data) => {
     await addNote(data);
@@ -152,7 +142,6 @@ const App = () => {
             handlerUnarchiveNote,
             handlerArchiveNote,
             handlerDeleteNote,
-            handlerGetNote,
             onloginSuccess,
             filteredActiveNotes,
             setActiveNotes,
