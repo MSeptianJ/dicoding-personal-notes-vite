@@ -12,7 +12,6 @@ import {
   addNote,
   archiveNote,
   deleteNote,
-  getActiveNotes,
   getArchivedNotes,
   getUserLogged,
   putAccessToken,
@@ -27,7 +26,6 @@ const App = () => {
   // State
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const [activeNotes, setActiveNotes] = useState([]);
   const [archiveNotes, setArchiveNotes] = useState([]);
 
   // Variables
@@ -54,16 +52,19 @@ const App = () => {
     },
   ];
 
-  const filteredActiveNotes = activeNotes.filter((note) =>
-    note.title.toLowerCase().includes(query),
-  );
+  const filteredNotes = (notes) => {
+    const filtered = notes?.filter((note) =>
+      note.title.toLowerCase().includes(query),
+    );
 
-  const filteredArchiveNotes = archiveNotes.filter((note) =>
+    return filtered;
+  };
+
+  const filteredArchiveNotes = archiveNotes?.filter((note) =>
     note.title.toLowerCase().includes(query),
   );
 
   // Functions
-
   const handlerAddNote = async (data) => {
     await addNote(data);
     navigate("/");
@@ -74,10 +75,7 @@ const App = () => {
   };
 
   const handlerArchiveNote = async (id) => {
-    archiveNote(id);
-
-    const { data } = await getActiveNotes();
-    setActiveNotes(data);
+    await archiveNote(id);
 
     const notePath = location.pathname.includes("/note");
 
@@ -87,7 +85,7 @@ const App = () => {
   };
 
   const handlerUnarchiveNote = async (id) => {
-    unarchiveNote(id);
+    await unarchiveNote(id);
 
     const { data } = await getArchivedNotes(id);
     setArchiveNotes(data);
@@ -100,13 +98,7 @@ const App = () => {
   };
 
   const handlerDeleteNote = async (id) => {
-    deleteNote(id);
-
-    const { data: activeData } = await getActiveNotes();
-    setActiveNotes(activeData);
-
-    const { data: archiveData } = await getActiveNotes();
-    setActiveNotes(archiveData);
+    await deleteNote(id);
 
     const notePath = location.pathname.includes("/note");
 
@@ -135,7 +127,7 @@ const App = () => {
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
           context={{
-            activeNotes,
+            query,
             archiveNotes,
             handlerAddNote,
             handlerSearchNote,
@@ -143,10 +135,10 @@ const App = () => {
             handlerArchiveNote,
             handlerDeleteNote,
             onloginSuccess,
-            filteredActiveNotes,
-            setActiveNotes,
+            filteredNotes,
             filteredArchiveNotes,
             setArchiveNotes,
+            setSearchParams,
           }}
         />
       </div>

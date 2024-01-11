@@ -1,28 +1,24 @@
-import { useCallback, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import Loading from "../../components/Loading";
 import NoteSearch from "../../components/NoteSearch";
 import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
 import NoteCardList from "../../components/card/NoteCardList";
+import useFetchData from "../../hooks/useFetchData";
 import { getActiveNotes } from "../../utils/network-data";
 
 const HomePage = () => {
-  const {
-    handlerSearchNote,
-    handlerArchiveNote,
-    handlerUnarchiveNote,
-    handlerDeleteNote,
-    filteredActiveNotes,
-    setActiveNotes,
-  } = useOutletContext();
+  const { handlerSearchNote, filteredNotes } = useOutletContext();
+  const { data, isLoading, isSuccess, isError } = useFetchData(getActiveNotes);
 
-  const checkUserNotes = useCallback(async () => {
-    const { data } = await getActiveNotes();
-    setActiveNotes(data);
-  }, [filteredActiveNotes, setActiveNotes]); // eslint-disable-line
+  const filteredActiveNotes = filteredNotes(data);
 
-  useEffect(() => {
-    checkUserNotes();
-  }, [checkUserNotes]);
+  if (isError) {
+    return (
+      <div className="w-full text-center">
+        <h2 className=" text-xl text-red-500">Error</h2>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -36,13 +32,15 @@ const HomePage = () => {
       </div>
 
       <div className=" grid w-full gap-5">
-        <NoteCardList
-          ListTitle="Notes"
-          ListNotes={filteredActiveNotes}
-          handlerArchiveNote={handlerArchiveNote}
-          handlerUnarchiveNote={handlerUnarchiveNote}
-          handlerDeleteNote={handlerDeleteNote}
-        />
+        {isLoading && (
+          <div className="m-auto h-40 w-40">
+            <Loading />
+          </div>
+        )}
+
+        {isSuccess && (
+          <NoteCardList ListTitle="Notes" ListNotes={filteredActiveNotes} />
+        )}
       </div>
     </>
   );

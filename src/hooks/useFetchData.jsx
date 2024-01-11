@@ -1,27 +1,41 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-const useFetchData = (fetchFunc) => {
+const useFetchData = (fetchFunc, id) => {
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
+  const startFetching = useCallback(async () => {
     setIsLoading(true);
+    if (!id) {
+      const { error, data } = await fetchFunc();
 
-    fetchFunc
-      .then((response) => {
+      if (!error) {
         setIsLoading(false);
-        setData(response.data);
+        setData(data);
         setIsSuccess(true);
-        if (response.error) {
-          setIsError(true);
-        }
-      })
-      .catch(() => {
+      } else {
         setIsError(true);
-      });
+      }
+    }
+
+    if (id) {
+      const { error, data } = await fetchFunc(id);
+
+      if (!error) {
+        setIsLoading(false);
+        setData(data);
+        setIsSuccess(true);
+      } else {
+        setIsError(true);
+      }
+    }
   }, []); // eslint-disable-line
+
+  useEffect(() => {
+    startFetching();
+  }, [startFetching]); // eslint-disable-line
 
   return { data, isLoading, isSuccess, isError };
 };
