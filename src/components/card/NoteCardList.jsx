@@ -1,13 +1,7 @@
 import PropTypes from "prop-types";
 import NoteCard from "./NoteCard";
 
-const NoteCardList = ({
-  ListTitle,
-  ListNotes,
-  handlerArchiveNote,
-  handlerUnarchiveNote,
-  handlerDeleteNote,
-}) => {
+const NoteCardList = ({ ListTitle, ListNotes }) => {
   return (
     <div className=" bg-sub w-full rounded-sm p-3">
       <h2 className=" mb-5 text-xl font-bold uppercase">{ListTitle}</h2>
@@ -17,15 +11,7 @@ const NoteCardList = ({
         } m-auto w-full `}
       >
         {ListNotes.length ? (
-          ListNotes?.map((note, id) => (
-            <NoteCard
-              key={id}
-              noteData={note}
-              handlerArchiveNote={handlerArchiveNote}
-              handlerUnarchiveNote={handlerUnarchiveNote}
-              handlerDeleteNote={handlerDeleteNote}
-            />
-          ))
+          ListNotes?.map((note, id) => <NoteCard key={id} noteData={note} />)
         ) : (
           <p className=" text-center">No Notes</p>
         )}
@@ -37,9 +23,6 @@ const NoteCardList = ({
 NoteCardList.propTypes = {
   ListTitle: PropTypes.string.isRequired,
   ListNotes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handlerArchiveNote: PropTypes.func.isRequired,
-  handlerUnarchiveNote: PropTypes.func.isRequired,
-  handlerDeleteNote: PropTypes.func.isRequired,
 };
 
 export default NoteCardList;
