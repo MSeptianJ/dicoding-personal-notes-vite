@@ -1,8 +1,13 @@
 import PropTypes from "prop-types";
 import { AuthContextProvider } from "./AuthContext";
+import { ThemeContextProvider } from "./ThemeContext";
 
 export const DataContextProvider = ({ children }) => {
-  return <AuthContextProvider>{children}</AuthContextProvider>;
+  return (
+    <AuthContextProvider>
+      <ThemeContextProvider>{children}</ThemeContextProvider>
+    </AuthContextProvider>
+  );
 };
 
 DataContextProvider.propTypes = {

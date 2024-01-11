@@ -4,7 +4,7 @@ const Loading = () => {
   return (
     <div className="m-auto w-full text-center">
       <img src={LOADICON} alt="Loading..." className="h-full w-full" />
-      <h4 className="w-full">Loading ...</h4>
+      <h4 className="w-full dark:text-back">Loading ...</h4>
     </div>
   );
 };

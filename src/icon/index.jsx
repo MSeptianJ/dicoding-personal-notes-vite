@@ -1,5 +1,5 @@
 import { FaSearch } from "react-icons/fa";
-import { IoMdHome, IoMdPersonAdd } from "react-icons/io";
+import { IoMdHome, IoMdPersonAdd, IoMdSunny, IoMdMoon } from "react-icons/io";
 import {
   MdAddBox,
   MdArchive,
@@ -43,4 +43,12 @@ export const IconSearch = () => {
 
 export const IconAddNote = () => {
   return <MdAddBox />;
+};
+
+export const IconLightTheme = () => {
+  return <IoMdSunny />;
+};
+
+export const IconDarkTheme = () => {
+  return <IoMdMoon />;
 };

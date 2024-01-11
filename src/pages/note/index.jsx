@@ -41,7 +41,7 @@ const NotePage = () => {
             <p className="text-sm">{showFormattedDate(noteData?.createdAt)}</p>
           </div>
 
-          <div className=" m-auto mb-5 w-full border border-secondary p-6 py-3 text-lg shadow-md ">
+          <div className=" m-auto mb-5 w-full bg-primary p-6 py-3 text-lg text-back shadow-md ">
             {parser(noteData?.body)}
           </div>
 

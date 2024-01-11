@@ -1,10 +1,22 @@
+import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
-import { GetAuthContexts } from "./contexts/AuthContext";
-import { noUserRouter, withUserRouter } from "./router";
 import Loading from "./components/Loading";
+import { GetAuthContexts } from "./contexts/AuthContext";
+import { GetThemeContexts } from "./contexts/ThemeContext";
+import { noUserRouter, withUserRouter } from "./router";
 
 const Root = () => {
+  const { changeTheme } = GetThemeContexts();
   const { init, authedUser } = GetAuthContexts();
+
+  useEffect(() => {
+    if (localStorage.theme) {
+      changeTheme(localStorage.theme);
+    } else {
+      localStorage.setItem("theme", "light");
+      changeTheme("light");
+    }
+  }, []); // eslint-disable-line
 
   if (init) {
     return (

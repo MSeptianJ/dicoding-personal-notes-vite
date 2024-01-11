@@ -4,7 +4,9 @@ import NoteCard from "./NoteCard";
 const NoteCardList = ({ ListTitle, ListNotes }) => {
   return (
     <div className=" bg-sub w-full rounded-sm p-3">
-      <h2 className=" mb-5 text-xl font-bold uppercase">{ListTitle}</h2>
+      <h2 className=" mb-5 text-xl font-bold uppercase dark:text-back">
+        {ListTitle}
+      </h2>
       <div
         className={`${
           ListNotes.length ? "grid gap-5 md:grid-cols-2 lg:grid-cols-4" : ""
@@ -13,7 +15,7 @@ const NoteCardList = ({ ListTitle, ListNotes }) => {
         {ListNotes.length ? (
           ListNotes?.map((note, id) => <NoteCard key={id} noteData={note} />)
         ) : (
-          <p className=" text-center">No Notes</p>
+          <p className=" text-center dark:text-back">No Notes</p>
         )}
       </div>
     </div>

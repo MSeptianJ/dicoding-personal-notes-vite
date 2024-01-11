@@ -111,7 +111,7 @@ const App = () => {
   };
 
   return (
-    <div className=" min-h-screen w-full overflow-y-auto bg-back">
+    <div className=" min-h-screen w-full overflow-y-auto bg-back transition-colors dark:bg-gray-700">
       <NoteHeader navList={navList} logOutFunc={onLogOut} />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
