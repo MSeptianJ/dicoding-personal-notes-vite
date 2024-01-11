@@ -6,30 +6,26 @@ const useFetchData = (fetchFunc, id) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const startFetching = useCallback(async () => {
-    setIsLoading(true);
+  const checkFunction = async () => {
     if (!id) {
-      const { error, data } = await fetchFunc();
-
-      if (!error) {
-        setIsLoading(false);
-        setData(data);
-        setIsSuccess(true);
-      } else {
-        setIsError(true);
-      }
+      const noIdRespond = await fetchFunc();
+      return noIdRespond;
     }
 
-    if (id) {
-      const { error, data } = await fetchFunc(id);
+    const idRespond = await fetchFunc(id);
+    return idRespond;
+  };
 
-      if (!error) {
-        setIsLoading(false);
-        setData(data);
-        setIsSuccess(true);
-      } else {
-        setIsError(true);
-      }
+  const startFetching = useCallback(async () => {
+    setIsLoading(true);
+    const { error, data } = await checkFunction();
+
+    if (!error) {
+      setIsLoading(false);
+      setData(data);
+      setIsSuccess(true);
+    } else {
+      setIsError(true);
     }
   }, []); // eslint-disable-line
 
