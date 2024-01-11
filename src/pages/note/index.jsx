@@ -1,23 +1,25 @@
 import parser from "html-react-parser";
-import { useOutletContext, useParams } from "react-router-dom";
-import NoteCardButton from "../../components/button/NoteCardButton";
+import { Navigate, useOutletContext, useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
 import useFetchData from "../../hooks/useFetchData";
-import { IconArchive, IconDelete, IconUnarchive } from "../../icon";
 import { showFormattedDate } from "../../utils";
 import { getNote } from "../../utils/network-data";
-import Loading from "../../components/Loading";
+import NotePageBtn from "./NotePageBtn";
 
 const NotePage = () => {
   const { handlerArchiveNote, handlerUnarchiveNote, handlerDeleteNote } =
     useOutletContext();
   const { id } = useParams();
-
   const {
     data: noteData,
     isLoading,
     isSuccess,
     isError,
-  } = useFetchData(getNote(id));
+  } = useFetchData(getNote, id);
+
+  if (isError) {
+    return <Navigate to={"/error"} />;
+  }
 
   return (
     <div className=" h-full w-full p-8">
@@ -26,8 +28,6 @@ const NotePage = () => {
           <Loading />
         </div>
       )}
-
-      {isError && <p>Error</p>}
 
       {isSuccess && (
         <>
@@ -45,41 +45,12 @@ const NotePage = () => {
             {parser(noteData?.body)}
           </div>
 
-          <div className=" grid h-14 w-full grid-cols-2 gap-2 bg-primary p-2 text-back">
-            {!noteData?.archived ? (
-              <>
-                <NoteCardButton
-                  btnTitle="Archive"
-                  btnFunc={handlerArchiveNote}
-                  btnId={noteData?.id}
-                  btnIcon={<IconArchive />}
-                  isFocus
-                />
-                <NoteCardButton
-                  btnTitle="Delete"
-                  btnFunc={handlerDeleteNote}
-                  btnId={noteData?.id}
-                  btnIcon={<IconDelete />}
-                />
-              </>
-            ) : (
-              <>
-                <NoteCardButton
-                  btnTitle="Unarchive"
-                  btnFunc={handlerUnarchiveNote}
-                  btnId={noteData?.id}
-                  btnIcon={<IconUnarchive />}
-                  isFocus
-                />
-                <NoteCardButton
-                  btnTitle="Delete"
-                  btnFunc={handlerDeleteNote}
-                  btnId={noteData?.id}
-                  btnIcon={<IconDelete />}
-                />
-              </>
-            )}
-          </div>
+          <NotePageBtn
+            noteData={noteData}
+            handlerArchiveNote={handlerArchiveNote}
+            handlerUnarchiveNote={handlerUnarchiveNote}
+            handlerDeleteNote={handlerDeleteNote}
+          />
         </>
       )}
     </div>

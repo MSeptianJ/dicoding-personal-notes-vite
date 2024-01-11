@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useOutletContext } from "react-router-dom";
 import Loading from "../../components/Loading";
 import NoteSearch from "../../components/NoteSearch";
 import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
@@ -13,11 +13,7 @@ const HomePage = () => {
   const filteredActiveNotes = filteredNotes(data);
 
   if (isError) {
-    return (
-      <div className="w-full text-center">
-        <h2 className=" text-xl text-red-500">Error</h2>
-      </div>
-    );
+    return <Navigate to={"/error"} />;
   }
 
   return (
