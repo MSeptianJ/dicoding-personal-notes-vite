@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Outlet,
   useLocation,
@@ -12,7 +11,6 @@ import {
   addNote,
   archiveNote,
   deleteNote,
-  getArchivedNotes,
   getUserLogged,
   putAccessToken,
   unarchiveNote,
@@ -26,7 +24,6 @@ const App = () => {
   // State
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
-  const [archiveNotes, setArchiveNotes] = useState([]);
 
   // Variables
   const navList = [
@@ -52,6 +49,7 @@ const App = () => {
     },
   ];
 
+  // Functions
   const filteredNotes = (notes) => {
     const filtered = notes?.filter((note) =>
       note.title.toLowerCase().includes(query),
@@ -60,11 +58,6 @@ const App = () => {
     return filtered;
   };
 
-  const filteredArchiveNotes = archiveNotes?.filter((note) =>
-    note.title.toLowerCase().includes(query),
-  );
-
-  // Functions
   const handlerAddNote = async (data) => {
     await addNote(data);
     navigate("/");
@@ -86,9 +79,6 @@ const App = () => {
 
   const handlerUnarchiveNote = async (id) => {
     await unarchiveNote(id);
-
-    const { data } = await getArchivedNotes(id);
-    setArchiveNotes(data);
 
     const notePath = location.pathname.includes("/note");
 
@@ -128,7 +118,6 @@ const App = () => {
         <Outlet
           context={{
             query,
-            archiveNotes,
             handlerAddNote,
             handlerSearchNote,
             handlerUnarchiveNote,
@@ -136,8 +125,6 @@ const App = () => {
             handlerDeleteNote,
             onloginSuccess,
             filteredNotes,
-            filteredArchiveNotes,
-            setArchiveNotes,
             setSearchParams,
           }}
         />
