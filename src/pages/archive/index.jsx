@@ -1,36 +1,41 @@
-import { useOutletContext } from "react-router-dom";
-import NoteSearch from "../../components/NoteSearch";
-import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
+import { Navigate, useOutletContext } from "react-router-dom";
+import Loading from "../../components/Loading";
+import NoteUI from "../../components/NoteUI";
 import NoteCardList from "../../components/card/NoteCardList";
+import { GetLocaleContexts } from "../../contexts/LocaleContext";
+import useFetchData from "../../hooks/useFetchData";
+import { getArchivedNotes } from "../../utils/network-data";
 
 const ArchivePage = () => {
-  const {
-    archiveNotes,
-    handlerSearchNote,
-    handlerArchiveNote,
-    handlerUnarchiveNote,
-    handlerDeleteNote,
-  } = useOutletContext();
+  const { locale } = GetLocaleContexts();
+  const { handlerSearchNote, filteredNotes } = useOutletContext();
+  const { data, isLoading, isSuccess, isError } =
+    useFetchData(getArchivedNotes);
+
+  const filteredArchivedNotes = filteredNotes(data);
+
+  if (isError) {
+    return <Navigate to={"/error"} />;
+  }
 
   return (
     <>
-      <div className=" grid w-full grid-cols-6 items-center rounded-sm bg-primary shadow-lg">
-        <div className=" col-span-4 w-full lg:col-span-5">
-          <NoteSearch searchFunc={handlerSearchNote} />
-        </div>
-        <div className=" col-span-2 h-full w-full lg:col-span-1">
-          <NoteSubmitBtn />
-        </div>
-      </div>
+      <NoteUI locale={locale} handlerSearchNote={handlerSearchNote} />
 
       <div className=" grid w-full gap-5">
-        <NoteCardList
-          ListTitle="Archive"
-          ListNotes={archiveNotes}
-          handlerArchiveNote={handlerArchiveNote}
-          handlerUnarchiveNote={handlerUnarchiveNote}
-          handlerDeleteNote={handlerDeleteNote}
-        />
+        {isLoading && (
+          <div className="m-auto h-40 w-40">
+            <Loading />
+          </div>
+        )}
+
+        {isSuccess && (
+          <NoteCardList
+            locale={locale}
+            ListTitle={locale === "en" ? "Archive Notes" : "Catatan Arsip"}
+            ListNotes={filteredArchivedNotes}
+          />
+        )}
       </div>
     </>
   );

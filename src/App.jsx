@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Outlet,
   useLocation,
@@ -6,59 +5,65 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import NoteHeader from "./components/header/NoteHeader";
+import { GetAuthContexts } from "./contexts/AuthContext";
+import { IconArchive, IconHome, IconLogIn, IconRegister } from "./icon";
 import {
   addNote,
   archiveNote,
   deleteNote,
-  getActiveNotes,
-  getAllNotes,
-  getArchivedNotes,
-  getNote,
+  getUserLogged,
+  putAccessToken,
   unarchiveNote,
-} from "./utils/local-data";
+} from "./utils/network-data";
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { loginClientSide } = GetAuthContexts();
 
   // State
-  const [notes, setNotes] = useState(getAllNotes());
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query") || "";
 
   // Variables
   const navList = [
     {
-      text: "Home",
+      en: "Active",
+      id: "Aktif",
       url: "/",
+      icon: <IconHome />,
     },
     {
-      text: "Archive",
+      en: "Archive",
+      id: "Arsip",
       url: "/archive",
+      icon: <IconArchive />,
+    },
+    {
+      en: "Log In",
+      id: "Masuk",
+      url: "/",
+      icon: <IconLogIn />,
+    },
+    {
+      en: "Register",
+      id: "Daftar",
+      url: "/register",
+      icon: <IconRegister />,
     },
   ];
 
-  const activeNotes = getActiveNotes().filter((note) =>
-    note.title.toLowerCase().includes(query),
-  );
-
-  const archiveNotes = getArchivedNotes().filter((note) =>
-    note.title.toLowerCase().includes(query),
-  );
-
   // Functions
-  const handlerGetNote = (id) => {
-    const note = getNote(id);
+  const filteredNotes = (notes) => {
+    const filtered = notes?.filter((note) =>
+      note.title.toLowerCase().includes(query),
+    );
 
-    if (!note) {
-      throw new Error("Page Not Found");
-    }
-
-    return note;
+    return filtered;
   };
 
-  const handlerAddNote = (data) => {
-    addNote(data);
+  const handlerAddNote = async (data) => {
+    await addNote(data);
     navigate("/");
   };
 
@@ -66,9 +71,8 @@ const App = () => {
     setSearchParams({ query: inputText.toLowerCase().trim() });
   };
 
-  const handlerArchiveNote = (id) => {
-    archiveNote(id);
-    setNotes(getAllNotes());
+  const handlerArchiveNote = async (id) => {
+    await archiveNote(id);
 
     const notePath = location.pathname.includes("/note");
 
@@ -77,9 +81,8 @@ const App = () => {
     }
   };
 
-  const handlerUnarchiveNote = (id) => {
-    unarchiveNote(id);
-    setNotes(getAllNotes());
+  const handlerUnarchiveNote = async (id) => {
+    await unarchiveNote(id);
 
     const notePath = location.pathname.includes("/note");
 
@@ -88,33 +91,45 @@ const App = () => {
     }
   };
 
-  const handlerDeleteNote = (id) => {
-    deleteNote(id);
-    setNotes(getAllNotes());
+  const handlerDeleteNote = async (id) => {
+    await deleteNote(id);
 
     const notePath = location.pathname.includes("/note");
 
     if (notePath) {
       navigate("/");
     }
+  };
+
+  const onloginSuccess = async ({ accessToken }) => {
+    navigate("/");
+    putAccessToken(accessToken);
+    const { data } = await getUserLogged();
+    loginClientSide(data);
+  };
+
+  const onLogOut = () => {
+    navigate("/login");
+    putAccessToken("");
+    loginClientSide();
   };
 
   return (
-    <div className=" min-h-screen w-full overflow-y-auto bg-back">
-      <NoteHeader navList={navList} />
+    <div className=" min-h-screen w-full overflow-y-auto bg-back transition-colors dark:bg-gray-700">
+      <NoteHeader navList={navList} logOutFunc={onLogOut} />
 
       <div className=" bg-subA w-ful m-auto grid max-w-screen-lg gap-4 p-4">
         <Outlet
           context={{
-            notes,
-            activeNotes,
-            archiveNotes,
+            query,
             handlerAddNote,
             handlerSearchNote,
             handlerUnarchiveNote,
             handlerArchiveNote,
             handlerDeleteNote,
-            handlerGetNote,
+            onloginSuccess,
+            filteredNotes,
+            setSearchParams,
           }}
         />
       </div>

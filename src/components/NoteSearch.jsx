@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { FaSearch } from "react-icons/fa";
+import { IconSearch } from "../icon";
 
-const NoteSearch = ({ searchFunc }) => {
+const NoteSearch = ({ locale, searchFunc }) => {
   const searchHandler = (e) => {
     searchFunc(e.target.value);
   };
@@ -12,8 +12,8 @@ const NoteSearch = ({ searchFunc }) => {
         className=" flex items-center gap-2 font-semibold uppercase text-back"
         htmlFor="NoteSearch"
       >
-        <FaSearch />
-        Search Notes
+        <IconSearch />
+        {locale === "en" ? "Search Notes" : "Cari Catatan"}
       </label>
 
       <div className=" m-auto w-full">
@@ -30,6 +30,7 @@ const NoteSearch = ({ searchFunc }) => {
 };
 
 NoteSearch.propTypes = {
+  locale: PropTypes.string.isRequired,
   searchFunc: PropTypes.func.isRequired,
 };
 
