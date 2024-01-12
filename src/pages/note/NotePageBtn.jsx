@@ -3,6 +3,7 @@ import NoteCardButton from "../../components/button/NoteCardButton";
 import { IconArchive, IconDelete, IconUnarchive } from "../../icon";
 
 const NotePageBtn = ({
+  locale,
   noteData,
   handlerArchiveNote,
   handlerUnarchiveNote,
@@ -13,14 +14,14 @@ const NotePageBtn = ({
       {!noteData?.archived ? (
         <>
           <NoteCardButton
-            btnTitle="Archive"
+            btnTitle={locale === "en" ? "Archive" : "Arsipkan"}
             btnFunc={handlerArchiveNote}
             btnId={noteData?.id}
             btnIcon={<IconArchive />}
             isFocus
           />
           <NoteCardButton
-            btnTitle="Delete"
+            btnTitle={locale === "en" ? "Delete" : "Hapus"}
             btnFunc={handlerDeleteNote}
             btnId={noteData?.id}
             btnIcon={<IconDelete />}
@@ -29,14 +30,14 @@ const NotePageBtn = ({
       ) : (
         <>
           <NoteCardButton
-            btnTitle="Unarchive"
+            btnTitle={locale === "en" ? "Unarchive" : "Aktifkan"}
             btnFunc={handlerUnarchiveNote}
             btnId={noteData?.id}
             btnIcon={<IconUnarchive />}
             isFocus
           />
           <NoteCardButton
-            btnTitle="Delete"
+            btnTitle={locale === "en" ? "Delete" : "Hapus"}
             btnFunc={handlerDeleteNote}
             btnId={noteData?.id}
             btnIcon={<IconDelete />}
@@ -48,6 +49,7 @@ const NotePageBtn = ({
 };
 
 NotePageBtn.propTypes = {
+  locale: PropTypes.string.isRequired,
   noteData: PropTypes.object.isRequired,
   handlerArchiveNote: PropTypes.func.isRequired,
   handlerUnarchiveNote: PropTypes.func.isRequired,

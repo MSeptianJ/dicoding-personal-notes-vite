@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const SubmitInput = ({ submitFunc }) => {
+const SubmitInput = ({ locale, submitFunc }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const MAXCHARACTER = 50;
@@ -22,9 +22,14 @@ const SubmitInput = ({ submitFunc }) => {
   return (
     <form className="m-auto grid w-full items-center" onSubmit={submitHandler}>
       <div className=" mb-1 mt-3 flex items-center justify-between">
-        <label htmlFor="submitTitle">Title Note</label>
+        <label htmlFor="submitTitle">
+          {locale === "en" ? "Title" : "Judul"}
+        </label>
         <p className="text-sm">
-          Title Characters Left : {MAXCHARACTER - title.length}
+          {locale === "en"
+            ? "Title Characters Left : "
+            : "Jumlah karakter tersisa : "}
+          {MAXCHARACTER - title.length}
         </p>
       </div>
       <input
@@ -37,7 +42,7 @@ const SubmitInput = ({ submitFunc }) => {
       />
 
       <label htmlFor="submitDesc" className="mb-1">
-        Description
+        {locale === "en" ? "Description" : "Deskripsi"}
       </label>
       <div
         id="submitDesc"
@@ -48,7 +53,7 @@ const SubmitInput = ({ submitFunc }) => {
 
       <input
         type="submit"
-        value="Submit"
+        value={locale === "en" ? "Submit" : "Tambahkan"}
         className=" m-auto block w-full cursor-pointer rounded-[4px] bg-accent px-4 py-2 font-bold uppercase transition-all duration-200 hover:bg-opacity-80"
       />
     </form>
@@ -56,6 +61,7 @@ const SubmitInput = ({ submitFunc }) => {
 };
 
 SubmitInput.propTypes = {
+  locale: PropTypes.string.isRequired,
   submitFunc: PropTypes.func.isRequired,
 };
 

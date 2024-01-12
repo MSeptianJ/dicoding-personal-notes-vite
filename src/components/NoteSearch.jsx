@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { IconSearch } from "../icon";
 
-const NoteSearch = ({ searchFunc }) => {
+const NoteSearch = ({ locale, searchFunc }) => {
   const searchHandler = (e) => {
     searchFunc(e.target.value);
   };
@@ -13,7 +13,7 @@ const NoteSearch = ({ searchFunc }) => {
         htmlFor="NoteSearch"
       >
         <IconSearch />
-        Search Notes
+        {locale === "en" ? "Search Notes" : "Cari Catatan"}
       </label>
 
       <div className=" m-auto w-full">
@@ -30,6 +30,7 @@ const NoteSearch = ({ searchFunc }) => {
 };
 
 NoteSearch.propTypes = {
+  locale: PropTypes.string.isRequired,
   searchFunc: PropTypes.func.isRequired,
 };
 

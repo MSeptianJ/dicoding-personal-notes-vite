@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
+import { GetLocaleContexts } from "../../contexts/LocaleContext";
 import { register } from "../../utils/network-data";
 import RegisterInput from "./RegisterInput";
 
 const RegisterPage = () => {
+  const { locale } = GetLocaleContexts();
   const navigate = useNavigate();
 
   const registerHandler = async (name, email, password) => {
@@ -15,16 +17,22 @@ const RegisterPage = () => {
 
   return (
     <section className="m-auto w-full max-w-screen-sm rounded-[4px] bg-primary p-6 text-back shadow-lg">
-      <h2 className=" mb-5 text-xl">Fill the form to register an account</h2>
+      <h2 className=" mb-5 text-xl">
+        {locale === "en"
+          ? "Fill the form to register an account"
+          : "Isi form untuk mendaftarkan akun"}
+      </h2>
 
-      <RegisterInput registerHandler={registerHandler} />
+      <RegisterInput locale={locale} registerHandler={registerHandler} />
 
-      <p className="mt-5 text-sm">
-        Already have an acount?{" "}
+      <div className="mt-5 flex gap-1 text-sm">
+        <p>
+          {locale === "en" ? "Already have an acount?" : "Sudah punya akun?"}
+        </p>
         <Link to="/login" className=" underline">
-          Login Here.
+          {locale === "en" ? "Login Here." : "Masuk di sini"}
         </Link>
-      </p>
+      </div>
     </section>
   );
 };

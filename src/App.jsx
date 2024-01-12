@@ -28,22 +28,26 @@ const App = () => {
   // Variables
   const navList = [
     {
-      text: "Home",
+      en: "Active",
+      id: "Aktif",
       url: "/",
       icon: <IconHome />,
     },
     {
-      text: "Archive",
+      en: "Archive",
+      id: "Arsip",
       url: "/archive",
       icon: <IconArchive />,
     },
     {
-      text: "Log In",
+      en: "Log In",
+      id: "Masuk",
       url: "/",
       icon: <IconLogIn />,
     },
     {
-      text: "Register",
+      en: "Register",
+      id: "Daftar",
       url: "/register",
       icon: <IconRegister />,
     },

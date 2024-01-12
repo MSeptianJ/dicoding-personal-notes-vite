@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import useInput from "../../hooks/useInput";
 
-const LoginInput = ({ loginHandler }) => {
+const LoginInput = ({ locale, loginHandler }) => {
   const [email, onEmailChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
 
@@ -37,7 +37,7 @@ const LoginInput = ({ loginHandler }) => {
       />
       <input
         type="submit"
-        value="Log In"
+        value={locale === "en" ? "Log In" : "Masuk"}
         className="m-auto w-full cursor-pointer rounded-[4px] bg-accent px-6 py-2 font-bold transition-all hover:bg-opacity-80"
       />
     </form>
@@ -45,6 +45,7 @@ const LoginInput = ({ loginHandler }) => {
 };
 
 LoginInput.propTypes = {
+  locale: PropTypes.string.isRequired,
   loginHandler: PropTypes.func.isRequired,
 };
 

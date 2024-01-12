@@ -3,10 +3,12 @@ import Loading from "../../components/Loading";
 import NoteSearch from "../../components/NoteSearch";
 import NoteSubmitBtn from "../../components/button/NoteSubmitBtn";
 import NoteCardList from "../../components/card/NoteCardList";
+import { GetLocaleContexts } from "../../contexts/LocaleContext";
 import useFetchData from "../../hooks/useFetchData";
 import { getArchivedNotes } from "../../utils/network-data";
 
 const ArchivePage = () => {
+  const { locale } = GetLocaleContexts();
   const { handlerSearchNote, filteredNotes } = useOutletContext();
   const { data, isLoading, isSuccess, isError } =
     useFetchData(getArchivedNotes);
@@ -21,10 +23,10 @@ const ArchivePage = () => {
     <>
       <div className=" grid w-full grid-cols-6 items-center rounded-sm bg-primary shadow-lg">
         <div className=" col-span-4 w-full lg:col-span-5">
-          <NoteSearch searchFunc={handlerSearchNote} />
+          <NoteSearch locale={locale} searchFunc={handlerSearchNote} />
         </div>
         <div className=" col-span-2 h-full w-full lg:col-span-1">
-          <NoteSubmitBtn />
+          <NoteSubmitBtn locale={locale} />
         </div>
       </div>
 
@@ -36,7 +38,11 @@ const ArchivePage = () => {
         )}
 
         {isSuccess && (
-          <NoteCardList ListTitle="Archive" ListNotes={filteredArchivedNotes} />
+          <NoteCardList
+            locale={locale}
+            ListTitle={locale === "en" ? "Archive Notes" : "Catatan Arsip"}
+            ListNotes={filteredArchivedNotes}
+          />
         )}
       </div>
     </>

@@ -1,5 +1,5 @@
 import { FaSearch } from "react-icons/fa";
-import { IoMdHome, IoMdPersonAdd, IoMdSunny, IoMdMoon } from "react-icons/io";
+import { IoMdHome, IoMdMoon, IoMdPersonAdd, IoMdSunny } from "react-icons/io";
 import {
   MdAddBox,
   MdArchive,
@@ -8,6 +8,7 @@ import {
   MdLogout,
   MdUnarchive,
 } from "react-icons/md";
+import { SiGoogletranslate } from "react-icons/si";
 
 export const IconLogIn = () => {
   return <MdLogin />;
@@ -51,4 +52,8 @@ export const IconLightTheme = () => {
 
 export const IconDarkTheme = () => {
   return <IoMdMoon />;
+};
+
+export const IconTranslate = () => {
+  return <SiGoogletranslate />;
 };
