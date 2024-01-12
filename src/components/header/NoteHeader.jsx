@@ -38,7 +38,7 @@ const NoteHeader = ({ navList, logOutFunc }) => {
             onClick={() => changeTheme(theme === "light" ? "dark" : "light")}
             className="flex w-full items-center gap-2 p-2 uppercase"
           >
-            {theme === "light" ? <IconLightTheme /> : <IconDarkTheme />}
+            {theme === "light" ? <IconDarkTheme /> : <IconLightTheme />}
           </button>
         </div>
 

@@ -46,7 +46,7 @@ const SubmitInput = ({ locale, submitFunc }) => {
       </label>
       <div
         id="submitDesc"
-        className=" mb-2 block h-40 w-full rounded-[4px] border-2 border-back bg-transparent p-2 text-sm"
+        className=" mb-2 block h-40 w-full overflow-auto rounded-[4px] border-2 border-back bg-transparent p-2 text-sm"
         onInput={descHandler}
         contentEditable
       ></div>
